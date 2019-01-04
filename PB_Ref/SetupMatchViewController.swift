@@ -127,7 +127,7 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
         showDoubles(show: false) // show doubles buttons & fields
         swapRef(t: 0)         // reset ref and serv dot
         
-        // Reset parameters
+        // Reset buttons
 		posTypeOutlet.selectedSegmentIndex = 0
 		matchTypeOutlet.selectedSegmentIndex = 0
         pointTypeOutlet.selectedSegmentIndex = 0
