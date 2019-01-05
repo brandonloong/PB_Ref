@@ -53,6 +53,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6AEB8E4621DFBA4300605C85 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6AFD5A762166DE0D00072602 /* ViewController.swift */,
+				6AFD5A9C2166DFE100072602 /* SetupMatchViewController.swift */,
+				6A45360A2169BA0800A25670 /* CoinTossViewController.swift */,
+				6AFD5A9E2166E07200072602 /* MatchViewController.swift */,
+				6A4536082169B84700A25670 /* TimeOutViewController.swift */,
+				6A45360C216A9ACE00A25670 /* GenInfoViewController.swift */,
+				6AFD5AA02166E08000072602 /* MatchSummaryViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		6AEB8E4721DFBA6A00605C85 /* Data-Model */ = {
+			isa = PBXGroup;
+			children = (
+				6A15FF4221CD955C0015B272 /* Match.swift */,
+				6A27354821CB339C00B57CA0 /* Team.swift */,
+			);
+			path = "Data-Model";
+			sourceTree = "<group>";
+		};
 		6AFD5A682166DE0D00072602 = {
 			isa = PBXGroup;
 			children = (
@@ -73,15 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				6AFD5A742166DE0D00072602 /* AppDelegate.swift */,
-				6AFD5A762166DE0D00072602 /* ViewController.swift */,
-				6AFD5A9C2166DFE100072602 /* SetupMatchViewController.swift */,
-				6A45360A2169BA0800A25670 /* CoinTossViewController.swift */,
-				6A15FF4221CD955C0015B272 /* Match.swift */,
-				6AFD5A9E2166E07200072602 /* MatchViewController.swift */,
-				6A27354821CB339C00B57CA0 /* Team.swift */,
-				6A4536082169B84700A25670 /* TimeOutViewController.swift */,
-				6A45360C216A9ACE00A25670 /* GenInfoViewController.swift */,
-				6AFD5AA02166E08000072602 /* MatchSummaryViewController.swift */,
+				6AEB8E4621DFBA4300605C85 /* Controllers */,
+				6AEB8E4721DFBA6A00605C85 /* Data-Model */,
 				6A27354E21CD5E6700B57CA0 /* Test.swift */,
 				6AFD5A782166DE0D00072602 /* Main.storyboard */,
 				6AFD5A7B2166DE0D00072602 /* Assets.xcassets */,

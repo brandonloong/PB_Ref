@@ -14,13 +14,13 @@ class Match {
     let winScore: Int, winGame: Int, maxGame: Int, switchScore: Int
     let server0: Int
     
-    init(p0: [String], p1: Int, p2: Int, p3: Int, p4: Int, p5: Int) {
-        playerList = p0
-		posType = p1
-        matchType = p2
-        pointType = p3
-        gameType = p4
-		switchType = p5
+	init(players: [String], params: [Int]) {
+        playerList = players
+		posType = params[0]
+        matchType = params[1]
+        pointType = params[2]
+        gameType = params[3]
+		switchType = params[4]
 		
 		// Calculate match parameters
 		playerNames = playerList

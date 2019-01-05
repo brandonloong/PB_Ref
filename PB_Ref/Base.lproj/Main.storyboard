@@ -23,7 +23,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="qNm-QN-Pcs"/>
                                 </constraints>
-                                <state key="normal" title="New Match"/>
+                                <state key="normal" title="Start Match"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                         <integer key="value" value="1"/>

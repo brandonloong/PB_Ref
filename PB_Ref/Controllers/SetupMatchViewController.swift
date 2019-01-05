@@ -27,14 +27,14 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var swap1ButtonOutlet: UIButton!
     
     // Variables
-    // mT = [0,1] for [Doubles,Singles]
     var mT = 0, nextField = 0, j = Int(), tField = UITextField()
-    
     // Arrays
     let ipTextArray = ["Player 1","Player 2","Player 3","Player 4"]
-    var pTextArray = [String]()
+    var pTextArray = [String](), defaultArray = [0,0,0,0,0]
     var pFieldArray = [UITextField](), dImageArray = [UIImageView]()
-    
+	// UserDefaults for saving match preferences
+	let matchDefaults = UserDefaults.standard
+	
     /*-Functions-------------------------------------------------------------*/
     // Switch player spots on same side when serving team wins a point
     func swapSpots(t: Int) {
@@ -82,11 +82,16 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    // Display default player names and update text array to them
+    // Reset player fields
     func resetPlayerFields() {
         for i in 0...3 {pFieldArray[i].text = ipTextArray[i]}
         pTextArray = ipTextArray
     }
+	// Default player fields
+//	func defaultPlayerFields() {
+//		for i in 0...3 {pFieldArray[i].text = ipTextArray[i]}
+//		pTextArray = ipTextArray
+//	}
     // Locate what field is being edited
     func selectedField(f: UITextField) -> Int {
         j = 0               // j saves the index of selected field
@@ -96,8 +101,7 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
     
     /*-Buttons-------------------------------------------------------------*/
     // Unwind to Setup Match VC
-    @IBAction func unwindToSetupMatch(segue: UIStoryboardSegue) {
-    }
+    @IBAction func unwindToSetupMatch(segue: UIStoryboardSegue) {}
     @IBAction func swapButton(_ sender: UIButton) {
         let s = sender.tag
         if s != 2 {     // swap players
@@ -115,17 +119,14 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
         let show = (mT==0 ? false : true)
         showDoubles(show: show)
     }
-    @IBAction func pointTypeButton(_ sender: UISegmentedControl) {
-    }
-    @IBAction func gameTypeButton(_ sender: UISegmentedControl) {
-    }
-	@IBAction func switchTypeButton(_ sender: UISegmentedControl) {
-	}
+    @IBAction func pointTypeButton(_ sender: UISegmentedControl) {}
+    @IBAction func gameTypeButton(_ sender: UISegmentedControl) {}
+	@IBAction func switchTypeButton(_ sender: UISegmentedControl) {}
     @IBAction func resetSetupButton(_ sender: UIButton) {
         // Reset court layout
         resetPlayerFields()
-        showDoubles(show: false) // show doubles buttons & fields
-        swapRef(t: 0)         // reset ref and serv dot
+        showDoubles(show: false)	// show doubles buttons & fields
+        swapRef(t: 0)         		// reset ref and serv dot
         
         // Reset buttons
 		posTypeOutlet.selectedSegmentIndex = 0
@@ -144,7 +145,6 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
     /*-Std Stuff-------------------------------------------------------------*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         // Arrays
         pTextArray = ipTextArray
@@ -152,6 +152,16 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
         dImageArray = [d1Image,d2Image]
         
         resetPlayerFields()     // default player fields
+		
+		// Update view with last used parameters from UserDefaults
+		if let temp = matchDefaults.array(forKey: "defaultMatch") as? [Int] {
+			defaultArray = temp
+		}
+		posTypeOutlet.selectedSegmentIndex = defaultArray[0]
+		matchTypeOutlet.selectedSegmentIndex = defaultArray[1]
+		pointTypeOutlet.selectedSegmentIndex = defaultArray[2]
+		gameTypeOutlet.selectedSegmentIndex = defaultArray[3]
+		switchTypeOutlet.selectedSegmentIndex = defaultArray[4]
 		
 		// Delegate control of keyboard to SetupMatchVC
         // Can do this in InterfaceBuilder by dragging fields to VC-delegate
@@ -180,26 +190,26 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 	}
     // Hide keyboard if touched outside of text field
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        resetBlankFields()    // if blank, replace with "Player X"
+		resetBlankFields()    // if blank, replace with "Player #"
         self.view.endEditing(true)
     }
     // Pass new match object to MatchViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toMatchVC" {
-            // Save current parameters
+            // Get current parameters
 			let p1 = posTypeOutlet.selectedSegmentIndex
             let p2 = matchTypeOutlet.selectedSegmentIndex
             let p3 = pointTypeOutlet.selectedSegmentIndex
             let p4 = gameTypeOutlet.selectedSegmentIndex
 			let p5 = switchTypeOutlet.selectedSegmentIndex
-            
-            // Create match to pass on
-			let match_0 = Match(p0: pTextArray, p1: p1, p2: p2, p3: p3, p4: p4, p5: p5)
 			
-			// Create destination VC for match_0
+			// Save them to persistent UserDefaults
+			defaultArray = [p1,p2,p3,p4,p5]
+			matchDefaults.set(defaultArray, forKey: "defaultMatch")
+			
+            // Create match, destination VC, and send it
+			let match_0 = Match(players: pTextArray, params: defaultArray)
             let matchVC = segue.destination as! MatchViewController
-			
-            // Send match_0
             matchVC.match_0 = match_0
         }
     }
