@@ -27,10 +27,11 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var swap1ButtonOutlet: UIButton!
     
     // Variables
-    var mT = 0, nextField = 0, j = Int(), tField = UITextField()
+    var t = Int(), nextField = 0, j = Int(), tField = UITextField()
     // Arrays
     let ipTextArray = ["Player 1","Player 2","Player 3","Player 4"]
-    var pTextArray = [String](), defaultArray = [0,0,0,0,0]
+    var pTextArray = [String](), resetArray = [0,0,0,0,0]
+	var defaultArray = [Int]()
     var pFieldArray = [UITextField](), dImageArray = [UIImageView]()
 	// UserDefaults for saving match preferences
 	let matchDefaults = UserDefaults.standard
@@ -98,6 +99,14 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
         for i in 0...3 {if f == pFieldArray[i] {j = i; break}}
         return j
     }
+	// Update buttons to specified values
+	func updateButtons(params: [Int]) {
+		posTypeOutlet.selectedSegmentIndex = params[0]
+		matchTypeOutlet.selectedSegmentIndex = params[1]
+		pointTypeOutlet.selectedSegmentIndex = params[2]
+		gameTypeOutlet.selectedSegmentIndex = params[3]
+		switchTypeOutlet.selectedSegmentIndex = params[4]
+	}
     
     /*-Buttons-------------------------------------------------------------*/
     // Unwind to Setup Match VC
@@ -112,34 +121,40 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
         updatePlayerFields(f: pTextArray)
     }
 	@IBAction func posTypeButton(_ sender: UISegmentedControl) {
-		swapRef(t: sender.selectedSegmentIndex)
+		t = sender.selectedSegmentIndex
+		swapRef(t: t)
+//		defaultArray[0] = t
+//		matchDefaults.set(defaultArray, forKey: "defaultMatch")
 	}
     @IBAction func matchTypeButton(_ sender: UISegmentedControl) {
-        mT = sender.selectedSegmentIndex
-        let show = (mT==0 ? false : true)
+        t = sender.selectedSegmentIndex
+        let show = (t==0 ? false : true)
         showDoubles(show: show)
+//		defaultArray[1] = t
+//		matchDefaults.set(defaultArray, forKey: "defaultMatch")
     }
-    @IBAction func pointTypeButton(_ sender: UISegmentedControl) {}
-    @IBAction func gameTypeButton(_ sender: UISegmentedControl) {}
-	@IBAction func switchTypeButton(_ sender: UISegmentedControl) {}
+    @IBAction func pointTypeButton(_ sender: UISegmentedControl) {
+//		t = sender.selectedSegmentIndex
+//		defaultArray[2] = t
+//		matchDefaults.set(defaultArray, forKey: "defaultMatch")
+	}
+    @IBAction func gameTypeButton(_ sender: UISegmentedControl) {
+//		t = sender.selectedSegmentIndex
+//		defaultArray[3] = t
+//		matchDefaults.set(defaultArray, forKey: "defaultMatch")
+	}
+	@IBAction func switchTypeButton(_ sender: UISegmentedControl) {
+//		t = sender.selectedSegmentIndex
+//		defaultArray[4] = t
+//		matchDefaults.set(defaultArray, forKey: "defaultMatch")
+	}
     @IBAction func resetSetupButton(_ sender: UIButton) {
-        // Reset court layout
-        resetPlayerFields()
+        resetPlayerFields()			// reset player fields
         showDoubles(show: false)	// show doubles buttons & fields
         swapRef(t: 0)         		// reset ref and serv dot
-        
-        // Reset buttons
-		posTypeOutlet.selectedSegmentIndex = 0
-		matchTypeOutlet.selectedSegmentIndex = 0
-        pointTypeOutlet.selectedSegmentIndex = 0
-        gameTypeOutlet.selectedSegmentIndex = 0
-		switchTypeOutlet.selectedSegmentIndex = 0
+		updateButtons(params: resetArray)	// reset button values
     }
-    @IBAction func startMatchButton(_ sender: UIButton) {
-        // Create match from selected parameters
-//        let playerList = [0,1,2,3].map({pFieldArray[$0].text})
-        print("startMatchButton")
-    }
+    @IBAction func startMatchButton(_ sender: UIButton) {}
     
     
     /*-Std Stuff-------------------------------------------------------------*/
@@ -153,15 +168,10 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
         
         resetPlayerFields()     // default player fields
 		
-		// Update view with last used parameters from UserDefaults
-		if let temp = matchDefaults.array(forKey: "defaultMatch") as? [Int] {
-			defaultArray = temp
+		// Update view with last selected parameters from UserDefaults
+		if let defaultArray = matchDefaults.array(forKey: "defaultMatch") as? [Int] {
+			updateButtons(params: defaultArray)
 		}
-		posTypeOutlet.selectedSegmentIndex = defaultArray[0]
-		matchTypeOutlet.selectedSegmentIndex = defaultArray[1]
-		pointTypeOutlet.selectedSegmentIndex = defaultArray[2]
-		gameTypeOutlet.selectedSegmentIndex = defaultArray[3]
-		switchTypeOutlet.selectedSegmentIndex = defaultArray[4]
 		
 		// Delegate control of keyboard to SetupMatchVC
         // Can do this in InterfaceBuilder by dragging fields to VC-delegate
@@ -174,8 +184,8 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
     }
 	// Highlight next player field when pressing Enter (different for doubles or singles)
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        j = selectedField(f: textField)     // find # of selected field
-        nextField = (mT==0 ? (j+1)%4 : (j+2)%4)   // for singles, skip a field
+        j = selectedField(f: textField)     	// find # of selected field
+        nextField = (t==0 ? (j+1)%4 : (j+2)%4)	// for singles, skip a field
 		
 		if pFieldArray[nextField].text == "Player \(nextField)" {	// if the next field is default text, make that active on Return key
 			textField.resignFirstResponder()
@@ -203,14 +213,21 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
             let p4 = gameTypeOutlet.selectedSegmentIndex
 			let p5 = switchTypeOutlet.selectedSegmentIndex
 			
+//			if p2==1 {
+//				pTextArray[1] = ""
+//				pTextArray[3] = ""
+//			}
+			
 			// Save them to persistent UserDefaults
 			defaultArray = [p1,p2,p3,p4,p5]
 			matchDefaults.set(defaultArray, forKey: "defaultMatch")
 			
             // Create match, destination VC, and send it
 			let match_0 = Match(players: pTextArray, params: defaultArray)
+//			let match = Match(players: pTextArray, params: defaultArray)
             let matchVC = segue.destination as! MatchViewController
             matchVC.match_0 = match_0
+//			matchVC.match = match
         }
     }
 }

@@ -302,7 +302,6 @@
                                 <segments>
                                     <segment title="1"/>
                                     <segment title="3"/>
-                                    <segment title="5"/>
                                 </segments>
                                 <connections>
                                     <action selector="gameTypeButton:" destination="nyK-oP-jRM" eventType="valueChanged" id="sni-Dk-Fv9"/>

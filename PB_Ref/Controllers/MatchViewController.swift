@@ -33,7 +33,7 @@ class MatchViewController: UIViewController {
 	@IBOutlet weak var gameClockButtonOutlet: UIButton!
 	
     // Variables
-	var match_0: Match?, match: Match?
+	var match_0: Match?, match : Match?
     var matchType = 0, scoreType = 0, gameType = 0, posType = 0, gTime = [0,0,0]
     var gNum = 0, show = Int(), hide = Int(), team1 = Int(), team2 = Int()
 	var timer1 = Timer(), timeOn = false

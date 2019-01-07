@@ -12,7 +12,7 @@ class Match {
     let playerList: [String], posType: Int, matchType: Int, pointType: Int
 	let gameType: Int, switchType: Int
     let winScore: Int, winGame: Int, maxGame: Int, switchScore: Int
-    let server0: Int
+    let server0: Int?
     
 	init(players: [String], params: [Int]) {
         playerList = players
@@ -168,7 +168,7 @@ class Match {
 		gameIndex += 1			// increase game count
 		
 		// Reset all game stuff
-		score = [0,0,2];			server = server0
+		score = [0,0,2];			server = server0!
 		sidePos = posType;			rCount = 0
 		runnerText = [" 0"," 0"]//		clock = 0
 		diff = 0;	maxScore = 0;	gameOver = false
