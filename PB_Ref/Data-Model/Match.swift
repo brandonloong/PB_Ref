@@ -30,7 +30,7 @@ class Match {
 		maxGame = 2*gameType + 1	// 1, 3, or 5 games possible
 		server0 = (posType==0 ? 0 : 2)		// initial server position
 		
-		// Calculate beginning match variables
+		// Calculate initial match variables
 		gamesWon = [0,0]
 		gameIndex = 0
 		switchedAlready = false
@@ -39,19 +39,29 @@ class Match {
 		// Create first game
 		newGame()
     }
-    
-	// In-game variables
+	
+	// Tuple arrays to store per game data for each state
+	// Eventually, just use the row index as rCount
+	var stateTuple1: [(score: [Int], server: Int, sidePos: Int, teamPos: Int, playerSpots: [Int], clock: Int, runnerText: [String], switchedAlready: Bool, rCount: Int)] = []
+//	var stateTuple2: [(gameOver: Bool, gameIndex: Int)] = []
+//	var stateTuple3: [(gamesWon: [Int])] = []
+//	var stateTuple: [[()]]
+	var resultsTuple1: [(matchWinner: Int, gameScores: [[Int]], runnerHistory: [[String]], rCountHistory: [Int], scoreDiffHistory: [Int])] = []
+	
+	// stateArray data (eventually delete in favor of stateArrays)
     var score = [Int](), server = Int(), sidePos = Int(), teamPos = Int()
-	var rCount = Int(), playerSpots = [Int](), playerNames = [String]()
-	var runnerText = [String](), switchedAlready = Bool(), clock = Int()
-	// Between-game variables
-    var gamesWon = [Int](), gameIndex = Int(), gameScores = [[Int]]()
+	var rCount = Int(), playerSpots = [Int](), clock = Int()
+	var runnerText = [String](), switchedAlready = Bool()
+	var gamesWon = [Int](), gameIndex = Int(), gameScores = [[Int]]()
+	var gameOver = Bool()
+	
+	// resultsArray data
 	var gameTime = [Int](), matchWinner: Int?, runnerHistory = [[String]]()
-	var rallyHistory = [Int](), diff = Int(), diffHistory = [Int]()
-	var maxScore = Int(), show = Int(), hide = Int()
-	var gameOver = Bool(), isOddGame = Bool()
-	// Match variables
-	var matchOver = Bool()
+	var rCountHistory = [Int](), scoreDiff = Int(), scoreDiffHistory = [Int]()
+	
+	// Non-array data (just use for convenient usage)
+	var playerNames = [String](), maxScore = Int(), show = Int(), hide = Int()
+	var isOddGame = Bool(), matchOver = Bool(), count = Int()
 	
 	/*----------------------------------------------------------------------*/
     func point() {
@@ -118,8 +128,8 @@ class Match {
 	func checkGameOver() {
 		maxScore = max(score[0],score[1])
 		if maxScore >= winScore {
-			diff = abs(score[0]-score[1])    // score differential
-			if diff >= 2 {			// game won
+			scoreDiff = abs(score[0]-score[1])    // score differential
+			if scoreDiff >= 2 {			// game won
 				gameOver = true
 				saveGame()			// Save game info
 				print("checkGameOver()_game is over")
@@ -130,8 +140,8 @@ class Match {
 	func saveGame() {
 		// Game specific data
 		gameTime.append(clock)
-		rallyHistory.append(rCount)
-		diffHistory.append(diff)
+		rCountHistory.append(rCount)
+		scoreDiffHistory.append(scoreDiff)
 		
 		// Team specific data
 		gamesWon[teamPos] += 1		// add game won to winning team
@@ -170,10 +180,10 @@ class Match {
 		// Reset all game stuff
 		score = [0,0,2];			server = server0!
 		sidePos = posType;			rCount = 0
-		runnerText = [" 0"," 0"]//		clock = 0
-		diff = 0;	maxScore = 0;	gameOver = false
+		runnerText = [" 0"," 0"]//		clock = 0 (don't reset clock, just set a reference time of new game)
+		scoreDiff = 0;	maxScore = 0;	gameOver = false
 		
-		// Odd games [1,3,5], even game [2,4]
+		// Odd games [1,3,5], even games [2,4]
 		if gameIndex%2 == 1 {		// odd game indices
 			playerSpots = [0,1,2,3] // default spots
 			isOddGame = true

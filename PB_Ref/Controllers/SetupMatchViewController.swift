@@ -11,8 +11,10 @@ import UIKit
 class SetupMatchViewController: UIViewController, UITextFieldDelegate {
     
     // Fields
-    @IBOutlet weak var p1Field: UITextField!;   @IBOutlet weak var p2Field: UITextField!
-    @IBOutlet weak var p3Field: UITextField!;   @IBOutlet weak var p4Field: UITextField!
+//	@IBOutlet var pFields: UITextField!
+	@IBOutlet var p1Field: UITextField!;	@IBOutlet var p2Field: UITextField!
+	@IBOutlet var p3Field: UITextField!;	@IBOutlet var p4Field: UITextField!
+	
     // Image views
     @IBOutlet weak var d1Image: UIImageView!;   @IBOutlet weak var d2Image: UIImageView!
     @IBOutlet weak var refImage: UIImageView!
@@ -27,7 +29,8 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var swap1ButtonOutlet: UIButton!
     
     // Variables
-    var t = Int(), nextField = 0, j = Int(), tField = UITextField()
+    var activeTag = Int(), activeIndex = Int(), nextIndex = Int(), t = Int()
+	var activeField = UITextField()
     // Arrays
     let ipTextArray = ["Player 1","Player 2","Player 3","Player 4"]
     var pTextArray = [String](), resetArray = [0,0,0,0,0]
@@ -74,14 +77,10 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
         swap1ButtonOutlet.isHidden = show
     }
     // If a player field is ever left blank, add text "Player X"
-    func resetBlankFields() {
-        for i in 0...3 {
-            if pFieldArray[i].text == "" {
-                let fill = "Player \(i+1)"
-                pFieldArray[i].text = fill
-                pTextArray[i] = fill
-            }
-        }
+	func resetBlankField(_ textField: UITextField) {
+		if textField.text == "" {
+			textField.text = "Player \(activeTag)"
+		}
     }
     // Reset player fields
     func resetPlayerFields() {
@@ -94,11 +93,11 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 //		pTextArray = ipTextArray
 //	}
     // Locate what field is being edited
-    func selectedField(f: UITextField) -> Int {
-        j = 0               // j saves the index of selected field
-        for i in 0...3 {if f == pFieldArray[i] {j = i; break}}
-        return j
-    }
+//    func selectedField(f: UITextField) -> Int {
+//        j = 0               // j saves the index of selected field
+//        for i in 0...3 {if f == pFieldArray[i] {j = i; break}}
+//        return j
+//    }
 	// Update buttons to specified values
 	func updateButtons(params: [Int]) {
 		posTypeOutlet.selectedSegmentIndex = params[0]
@@ -106,6 +105,13 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 		pointTypeOutlet.selectedSegmentIndex = params[2]
 		gameTypeOutlet.selectedSegmentIndex = params[3]
 		switchTypeOutlet.selectedSegmentIndex = params[4]
+	}
+	// Change a player field text based on sender tag
+	func changePlayerName(t: Int) {
+		if let text = pFieldArray[t].text {
+			pTextArray[t] = text
+		}
+		print("\(pTextArray[t])")
 	}
     
     /*-Buttons-------------------------------------------------------------*/
@@ -156,7 +162,7 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
     }
     @IBAction func startMatchButton(_ sender: UIButton) {}
     
-    
+	
     /*-Std Stuff-------------------------------------------------------------*/
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -182,25 +188,46 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+	// Assign the newly active text field to your activeTextField variable
+	func textFieldDidBeginEditing(_ textField: UITextField) {
+		activeField = textField
+		activeTag = textField.tag
+		activeIndex = activeTag-1
+		nextIndex = (matchTypeOutlet.selectedSegmentIndex==0 ? (activeIndex+1)%4 : (activeIndex+2)%4)	// for singles, skip a field
+	}
 	// Highlight next player field when pressing Enter (different for doubles or singles)
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        j = selectedField(f: textField)     	// find # of selected field
-        nextField = (t==0 ? (j+1)%4 : (j+2)%4)	// for singles, skip a field
+		print("tag \(textField.tag)")
+//		activeTag = textField.tag
+//		activeIndex = activeTag-1
+//		nextIndex = (matchTypeOutlet.selectedSegmentIndex==0 ? (activeIndex+1)%4 : (activeIndex+2)%4)	// for singles, skip a field
+//        j = selectedField(f: textField)     	// find # of selected field
 		
-		if pFieldArray[nextField].text == "Player \(nextField)" {	// if the next field is default text, make that active on Return key
+//		if textField.text == "" {
+//			textField.text = "Player \(activeTag)"
+//		}
+		
+		// If the next field is default text, make it active on Return key
+		if pFieldArray[nextIndex].text == "Player \(nextIndex)" {
 			textField.resignFirstResponder()
-			pFieldArray[nextField].becomeFirstResponder()
+			pFieldArray[nextIndex].becomeFirstResponder()
 		} else {
 			textField.resignFirstResponder()
 		}
         
-        resetBlankFields()    // reset "Player X" names
-        pTextArray[j] = textField.text!
+		resetBlankField(textField)    // reset "Player #" names if left blank
+        pTextArray[activeIndex] = textField.text!
 		return true
 	}
+	// New function for modifying text fields
+//	@IBAction func playerNameDidChange(_ sender: UITextField) {
+//		changePlayerName(t: sender.tag)
+//		print("playerNameDidChange \(sender.tag)")
+//	}
+	
     // Hide keyboard if touched outside of text field
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-		resetBlankFields()    // if blank, replace with "Player #"
+		resetBlankField(activeField)    // if blank, replace with "Player #"
         self.view.endEditing(true)
     }
     // Pass new match object to MatchViewController
