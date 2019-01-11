@@ -42,15 +42,15 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
     /*-Functions-------------------------------------------------------------*/
     // Switch player spots on same side when serving team wins a point
     func swapSpots(t: Int) {
-        if t == 0 {     // swap left side
-            pTextArray.swapAt(0,1)
-        } else {        // swap right side
-            pTextArray.swapAt(2,3)
-        }
+        if t == 0 {pTextArray.swapAt(0,1)}	// swap left side
+		else {pTextArray.swapAt(2,3)}		// swap right side
+		
+		updateFields(f: pTextArray)
     }
     // Rotate player spots: add 2 to every player spot mod 4
     func swapSides() {
-        pTextArray = [2,3,0,1].map({pTextArray[$0]})  // rotate player fields
+        pTextArray = [2,3,0,1].map({pTextArray[$0]})
+		updateFields(f: pTextArray)
     }
     // Switch ref facing direction and serv dot
     func swapRef(t: Int) {
@@ -60,10 +60,6 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
         dImageArray[show].isHidden = false
         dImageArray[hide].isHidden = true
         refImage.image = UIImage(named: "tourny_ref_icon_vp\(t).png")
-    }
-    // Update player names
-    func updatePlayerFields(f: [String]) {
-        for i in 0...3 {pFieldArray[i].text = f[i]}
     }
     // Save player names from display into the text array
     func getPlayers() {
@@ -76,10 +72,17 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
         swap0ButtonOutlet.isHidden = show
         swap1ButtonOutlet.isHidden = show
     }
-    // If a player field is ever left blank, add text "Player X"
-	func resetBlankField(_ textField: UITextField) {
-		if textField.text == "" {
-			textField.text = "Player \(activeTag)"
+	// Update player names
+	func updateFields(f: [String]) {
+		for i in 0...3 {pFieldArray[i].text = f[i]}
+	}
+    // Check all fields for blanks, and reset with default text
+	func resetBlankFields() {
+		var holder = ""
+		for i in 0...3 {
+			holder = pFieldArray[i].text!
+			pTextArray[i] = (holder=="" ? "Player \(i+1)" : holder)
+			pFieldArray[i].text = pTextArray[i]
 		}
     }
     // Reset player fields
@@ -87,17 +90,6 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
         for i in 0...3 {pFieldArray[i].text = ipTextArray[i]}
         pTextArray = ipTextArray
     }
-	// Default player fields
-//	func defaultPlayerFields() {
-//		for i in 0...3 {pFieldArray[i].text = ipTextArray[i]}
-//		pTextArray = ipTextArray
-//	}
-    // Locate what field is being edited
-//    func selectedField(f: UITextField) -> Int {
-//        j = 0               // j saves the index of selected field
-//        for i in 0...3 {if f == pFieldArray[i] {j = i; break}}
-//        return j
-//    }
 	// Update buttons to specified values
 	func updateButtons(params: [Int]) {
 		posTypeOutlet.selectedSegmentIndex = params[0]
@@ -106,26 +98,20 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 		gameTypeOutlet.selectedSegmentIndex = params[3]
 		switchTypeOutlet.selectedSegmentIndex = params[4]
 	}
-	// Change a player field text based on sender tag
-	func changePlayerName(t: Int) {
-		if let text = pFieldArray[t].text {
-			pTextArray[t] = text
-		}
-		print("\(pTextArray[t])")
-	}
-    
+	
     /*-Buttons-------------------------------------------------------------*/
     // Unwind to Setup Match VC
     @IBAction func unwindToSetupMatch(segue: UIStoryboardSegue) {}
-    @IBAction func swapButton(_ sender: UIButton) {
-        let s = sender.tag
-        if s != 2 {     // swap players
-            swapSpots(t: s)
-        } else {        // swap sides
-            swapSides()
-        }
-        updatePlayerFields(f: pTextArray)
+	// Swap players on the same side
+    @IBAction func swapPlayersButton(_ sender: UIButton) {
+		print("swapPlayersButton Worked")
+		swapSpots(t: sender.tag)
     }
+	// Swap teams to different sides
+	@IBAction func swapSidesButton(_ sender: UIButton) {
+		print("swapSidesButton Worked")
+		swapSides()
+	}
 	@IBAction func posTypeButton(_ sender: UISegmentedControl) {
 		t = sender.selectedSegmentIndex
 		swapRef(t: t)
@@ -172,11 +158,12 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
         pFieldArray = [p1Field,p2Field,p3Field,p4Field]
         dImageArray = [d1Image,d2Image]
         
-        resetPlayerFields()     // default player fields
+        resetPlayerFields()     // fill in player fields
 		
 		// Update view with last selected parameters from UserDefaults
 		if let defaultArray = matchDefaults.array(forKey: "defaultMatch") as? [Int] {
 			updateButtons(params: defaultArray)
+			// need to updateFields??
 		}
 		
 		// Delegate control of keyboard to SetupMatchVC
@@ -184,10 +171,10 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 		p1Field.delegate = self; p2Field.delegate = self
         p3Field.delegate = self; p4Field.delegate = self
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+//    override func didReceiveMemoryWarning() {
+//        super.didReceiveMemoryWarning()
+//        // Dispose of any resources that can be recreated.
+//    }
 	// Assign the newly active text field to your activeTextField variable
 	func textFieldDidBeginEditing(_ textField: UITextField) {
 		activeField = textField
@@ -196,16 +183,9 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 		nextIndex = (matchTypeOutlet.selectedSegmentIndex==0 ? (activeIndex+1)%4 : (activeIndex+2)%4)	// for singles, skip a field
 	}
 	// Highlight next player field when pressing Enter (different for doubles or singles)
+	@discardableResult	// avoid usage warning on Bool output when using
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		print("tag \(textField.tag)")
-//		activeTag = textField.tag
-//		activeIndex = activeTag-1
-//		nextIndex = (matchTypeOutlet.selectedSegmentIndex==0 ? (activeIndex+1)%4 : (activeIndex+2)%4)	// for singles, skip a field
-//        j = selectedField(f: textField)     	// find # of selected field
-		
-//		if textField.text == "" {
-//			textField.text = "Player \(activeTag)"
-//		}
 		
 		// If the next field is default text, make it active on Return key
 		if pFieldArray[nextIndex].text == "Player \(nextIndex)" {
@@ -214,20 +194,16 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 		} else {
 			textField.resignFirstResponder()
 		}
-        
-		resetBlankField(textField)    // reset "Player #" names if left blank
-        pTextArray[activeIndex] = textField.text!
+		
+		// Check all fields (must be all in case another field was selected
+		// before field returned) for blanks and reset to default
+		resetBlankFields()
+		print(pTextArray)
 		return true
 	}
-	// New function for modifying text fields
-//	@IBAction func playerNameDidChange(_ sender: UITextField) {
-//		changePlayerName(t: sender.tag)
-//		print("playerNameDidChange \(sender.tag)")
-//	}
-	
     // Hide keyboard if touched outside of text field
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-		resetBlankField(activeField)    // if blank, replace with "Player #"
+		textFieldShouldReturn(activeField)
         self.view.endEditing(true)
     }
     // Pass new match object to MatchViewController
@@ -240,10 +216,7 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
             let p4 = gameTypeOutlet.selectedSegmentIndex
 			let p5 = switchTypeOutlet.selectedSegmentIndex
 			
-//			if p2==1 {
-//				pTextArray[1] = ""
-//				pTextArray[3] = ""
-//			}
+			// Adjust pNames for singles??
 			
 			// Save them to persistent UserDefaults
 			defaultArray = [p1,p2,p3,p4,p5]

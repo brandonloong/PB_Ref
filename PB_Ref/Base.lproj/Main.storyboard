@@ -145,7 +145,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" tag="1" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IR2-Xk-kdj">
-                                <rect key="frame" x="326" y="101" width="44" height="96"/>
+                                <rect key="frame" x="326" y="155" width="44" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <inset key="contentEdgeInsets" minX="18" minY="18" maxX="5" maxY="18"/>
                                 <state key="normal" title="Button" image="tourny_swap_icon_v1"/>
@@ -154,7 +154,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoF-Vf-brJ">
-                                <rect key="frame" x="5" y="101" width="44" height="96"/>
+                                <rect key="frame" x="5" y="155" width="44" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <inset key="contentEdgeInsets" minX="5" minY="18" maxX="18" maxY="18"/>
                                 <state key="normal" title="Button" image="tourny_swap_icon_v2"/>
@@ -163,30 +163,30 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tourny_court_v2" translatesAutoresizingMaskIntoConstraints="NO" id="Aa0-3i-xAu">
-                                <rect key="frame" x="50" y="87" width="275" height="124"/>
+                                <rect key="frame" x="50" y="141" width="275" height="124"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="REF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2f2-qm-dAD">
-                                <rect key="frame" x="172" y="229" width="31" height="13"/>
+                                <rect key="frame" x="172" y="283" width="31" height="13"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tourny_ref_icon_vp0" translatesAutoresizingMaskIntoConstraints="NO" id="1C0-Ve-dDb">
-                                <rect key="frame" x="155" y="181" width="66" height="53"/>
+                                <rect key="frame" x="155" y="235" width="66" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tourny_ball_icon_v1" translatesAutoresizingMaskIntoConstraints="NO" id="dGI-1j-WtA">
-                                <rect key="frame" x="37" y="173" width="11" height="12"/>
+                                <rect key="frame" x="37" y="227" width="11" height="12"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tourny_ball_icon_v1" translatesAutoresizingMaskIntoConstraints="NO" id="qvg-Pr-MkO">
-                                <rect key="frame" x="327" y="112" width="11" height="12"/>
+                                <rect key="frame" x="327" y="166" width="11" height="12"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <textField opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player 1" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6gS-GW-zCl">
-                                <rect key="frame" x="50" y="164" width="97" height="30"/>
+                                <rect key="frame" x="50" y="218" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
                                 <nil key="textColor"/>
@@ -194,7 +194,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next"/>
                             </textField>
                             <textField opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player 2" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="hdc-cC-nCs">
-                                <rect key="frame" x="50" y="103" width="97" height="30"/>
+                                <rect key="frame" x="50" y="157" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
                                 <nil key="textColor"/>
@@ -202,7 +202,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next"/>
                             </textField>
                             <textField opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player 3" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ro8-WT-atC">
-                                <rect key="frame" x="228" y="103" width="97" height="30"/>
+                                <rect key="frame" x="228" y="157" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
                                 <nil key="textColor"/>
@@ -210,22 +210,13 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next"/>
                             </textField>
                             <textField opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player 4" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="AEm-Hk-QB0">
-                                <rect key="frame" x="228" y="164" width="97" height="30"/>
+                                <rect key="frame" x="228" y="218" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next"/>
                             </textField>
-                            <button opaque="NO" tag="2" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JlI-d4-Kls">
-                                <rect key="frame" x="125" y="242" width="126" height="54"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <inset key="contentEdgeInsets" minX="33" minY="15" maxX="33" maxY="15"/>
-                                <state key="normal" title="Button" image="tourny_swap_icon_v3"/>
-                                <connections>
-                                    <action selector="swapButton:" destination="nyK-oP-jRM" eventType="touchUpInside" id="Vpk-zI-fFQ"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cc-Lj-FFw">
                                 <rect key="frame" x="16" y="559" width="343" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -329,6 +320,15 @@
                                     <action selector="posTypeButton:" destination="nyK-oP-jRM" eventType="valueChanged" id="5y5-PJ-7Oj"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" tag="2" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JlI-d4-Kls">
+                                <rect key="frame" x="125" y="87" width="126" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="33" minY="15" maxX="33" maxY="15"/>
+                                <state key="normal" title="Button" image="tourny_swap_icon_v4"/>
+                                <connections>
+                                    <action selector="swapButton:" destination="nyK-oP-jRM" eventType="touchUpInside" id="Vpk-zI-fFQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="892-2j-gPQ"/>
@@ -1636,6 +1636,6 @@
         <image name="tourny_ref_icon_vp0" width="368.54998779296875" height="226.80000305175781"/>
         <image name="tourny_swap_icon_v1" width="254.92500305175781" height="700.875"/>
         <image name="tourny_swap_icon_v2" width="255.375" height="700.875"/>
-        <image name="tourny_swap_icon_v3" width="700.875" height="255.375"/>
+        <image name="tourny_swap_icon_v4" width="700.875" height="255.375"/>
     </resources>
 </document>
