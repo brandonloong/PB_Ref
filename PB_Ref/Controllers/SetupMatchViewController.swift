@@ -118,40 +118,25 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 	}
 	@IBAction func startMatchButton(_ sender: UIButton) {
 	}
-	// params[0]
-	@IBAction func posTypeButton(_ sender: UISegmentedControl) {
-		let s = sender.selectedSegmentIndex
-		swapRef(side: s)
-		paramsArray[0] = s
+	// Update param function for all param buttons
+	@IBAction func paramButton(_ sender: UISegmentedControl) {
+		let t = sender.tag					// which button was clicked
+		let s = sender.selectedSegmentIndex	// which value was clicked
+		
+		// Save parameters
+		paramsArray[t] = s
 		matchDefaults.set(paramsArray, forKey: "defaultParams")
+		
+		// Extra functionality for 2 buttons (use switch to include more buttons)
+		if t==0 {
+			swapRef(side: s)
+		} else if t==1 {
+			let show = (s==0 ? false : true)
+			showDoubles(show: show)
+		}
+		print("paramButton \(paramsArray)")
 	}
-	// params[1]
-    @IBAction func matchTypeButton(_ sender: UISegmentedControl) {
-        let s = sender.selectedSegmentIndex
-        let show = (s==0 ? false : true)
-        showDoubles(show: show)
-		paramsArray[1] = s
-		matchDefaults.set(paramsArray, forKey: "defaultParams")
-    }
-	// params[2]
-    @IBAction func pointTypeButton(_ sender: UISegmentedControl) {
-		let s = sender.selectedSegmentIndex
-		paramsArray[2] = s
-		matchDefaults.set(paramsArray, forKey: "defaultParams")
-	}
-	// params[3]
-    @IBAction func gameTypeButton(_ sender: UISegmentedControl) {
-		let s = sender.selectedSegmentIndex
-		paramsArray[3] = s
-		matchDefaults.set(paramsArray, forKey: "defaultParams")
-	}
-	// params[4]
-	@IBAction func switchTypeButton(_ sender: UISegmentedControl) {
-		let s = sender.selectedSegmentIndex
-		paramsArray[4] = s
-		matchDefaults.set(paramsArray, forKey: "defaultParams")
-	}
-    
+	
 	
     /*-Std Stuff-------------------------------------------------------------*/
     override func viewDidLoad() {

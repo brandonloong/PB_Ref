@@ -265,7 +265,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Bt1-w4-Ao0">
+                            <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Bt1-w4-Ao0">
                                 <rect key="frame" x="158" y="387" width="200" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
@@ -273,10 +273,10 @@
                                     <segment title="Singles"/>
                                 </segments>
                                 <connections>
-                                    <action selector="matchTypeButton:" destination="nyK-oP-jRM" eventType="valueChanged" id="ou8-qb-5ur"/>
+                                    <action selector="paramButton:" destination="nyK-oP-jRM" eventType="valueChanged" id="1Pn-yI-bWI"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cNm-j1-ZbW">
+                            <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cNm-j1-ZbW">
                                 <rect key="frame" x="158" y="423" width="200" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
@@ -284,10 +284,10 @@
                                     <segment title="15"/>
                                 </segments>
                                 <connections>
-                                    <action selector="pointTypeButton:" destination="nyK-oP-jRM" eventType="valueChanged" id="8Pb-Sm-Pgt"/>
+                                    <action selector="paramButton:" destination="nyK-oP-jRM" eventType="valueChanged" id="kxZ-FQ-E5f"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="NES-SY-Cmr">
+                            <segmentedControl opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="NES-SY-Cmr">
                                 <rect key="frame" x="158" y="458" width="200" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
@@ -295,10 +295,10 @@
                                     <segment title="3"/>
                                 </segments>
                                 <connections>
-                                    <action selector="gameTypeButton:" destination="nyK-oP-jRM" eventType="valueChanged" id="sni-Dk-Fv9"/>
+                                    <action selector="paramButton:" destination="nyK-oP-jRM" eventType="valueChanged" id="OEy-SB-Rim"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ouh-k9-2n8">
+                            <segmentedControl opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ouh-k9-2n8">
                                 <rect key="frame" x="158" y="494" width="200" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
@@ -306,7 +306,7 @@
                                     <segment title="On"/>
                                 </segments>
                                 <connections>
-                                    <action selector="switchTypeButton:" destination="nyK-oP-jRM" eventType="valueChanged" id="LjT-2e-2Oo"/>
+                                    <action selector="paramButton:" destination="nyK-oP-jRM" eventType="valueChanged" id="ORe-c6-B1E"/>
                                 </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="opv-lJ-O9C">
@@ -317,7 +317,7 @@
                                     <segment title="Right"/>
                                 </segments>
                                 <connections>
-                                    <action selector="posTypeButton:" destination="nyK-oP-jRM" eventType="valueChanged" id="5y5-PJ-7Oj"/>
+                                    <action selector="paramButton:" destination="nyK-oP-jRM" eventType="valueChanged" id="awX-zy-0aR"/>
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JlI-d4-Kls">
