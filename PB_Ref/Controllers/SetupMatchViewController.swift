@@ -29,22 +29,21 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var swap1ButtonOutlet: UIButton!
     
     // Variables
-    var activeTag = Int(), activeIndex = Int(), nextIndex = Int(), t = Int()
+    var activeTag = Int(), activeIndex = Int(), nextIndex = Int()
 	var activeField = UITextField()
     // Arrays
-    let ipTextArray = ["Player 1","Player 2","Player 3","Player 4"]
-    var pTextArray = [String](), resetArray = [0,0,0,0,0]
-	var defaultArray = [Int]()
+    let p0TextArray = ["Player 1","Player 2","Player 3","Player 4"]
+    var pTextArray = [String]()
     var pFieldArray = [UITextField](), dImageArray = [UIImageView]()
-	// UserDefaults for saving match preferences
-	let matchDefaults = UserDefaults.standard
+	// UserDefaults for saving preferences
+	var paramsArray = [0,0,0,0,0]
+	let matchDefaults = UserDefaults.standard, resetArray = [0,0,0,0,0]
 	
     /*-Functions-------------------------------------------------------------*/
-    // Switch player spots on same side when serving team wins a point
-    func swapSpots(t: Int) {
-        if t == 0 {pTextArray.swapAt(0,1)}	// swap left side
+    // Switch player spots on same side (update array and view)
+    func swapSpots(side: Int) {
+        if side == 0 {pTextArray.swapAt(0,1)}	// swap left side
 		else {pTextArray.swapAt(2,3)}		// swap right side
-		
 		updateFields(f: pTextArray)
     }
     // Rotate player spots: add 2 to every player spot mod 4
@@ -52,46 +51,46 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
         pTextArray = [2,3,0,1].map({pTextArray[$0]})
 		updateFields(f: pTextArray)
     }
-    // Switch ref facing direction and serv dot
-    func swapRef(t: Int) {
-        let show = (t==0 ? 0 : 1)
-        let hide = (t==1 ? 0 : 1)
-        
-        dImageArray[show].isHidden = false
-        dImageArray[hide].isHidden = true
-        refImage.image = UIImage(named: "tourny_ref_icon_vp\(t).png")
-    }
-    // Save player names from display into the text array
-    func getPlayers() {
-        for i in 0...3 {pTextArray[i] = pFieldArray[i].text!}
-    }
-    // Display the doubles partner fields and the doubles buttons
-    func showDoubles(show: Bool) {
-        p2Field.isHidden = show
-        p4Field.isHidden = show
-        swap0ButtonOutlet.isHidden = show
-        swap1ButtonOutlet.isHidden = show
-    }
 	// Update player names
 	func updateFields(f: [String]) {
 		for i in 0...3 {pFieldArray[i].text = f[i]}
 	}
+	// Reset player fields
+	func resetPlayerFields() {
+		pTextArray = p0TextArray	// reset player names
+		updateFields(f: pTextArray)	// update the fields
+	}
+    // Switch ref facing direction and serv dot
+    func swapRef(side: Int) {
+        let show = (side==0 ? 0 : 1)
+        let hide = (side==1 ? 0 : 1)
+        dImageArray[show].isHidden = false
+        dImageArray[hide].isHidden = true
+        refImage.image = UIImage(named: "tourny_ref_icon_vp\(side).png")
+    }
+	// Display the doubles partner fields and the doubles buttons
+	func showDoubles(show: Bool) {
+		p2Field.isHidden = show
+		p4Field.isHidden = show
+		swap0ButtonOutlet.isHidden = show
+		swap1ButtonOutlet.isHidden = show
+	}
+    // Save player names from display into the text array
+    func getPlayers() {
+        for i in 0...3 {pTextArray[i] = pFieldArray[i].text!}
+    }
     // Check all fields for blanks, and reset with default text
 	func resetBlankFields() {
-		var holder = ""
+		var holder = String()
 		for i in 0...3 {
 			holder = pFieldArray[i].text!
 			pTextArray[i] = (holder=="" ? "Player \(i+1)" : holder)
 			pFieldArray[i].text = pTextArray[i]
 		}
     }
-    // Reset player fields
-    func resetPlayerFields() {
-        for i in 0...3 {pFieldArray[i].text = ipTextArray[i]}
-        pTextArray = ipTextArray
-    }
 	// Update buttons to specified values
 	func updateButtons(params: [Int]) {
+		paramsArray = params	// save to defaults
 		posTypeOutlet.selectedSegmentIndex = params[0]
 		matchTypeOutlet.selectedSegmentIndex = params[1]
 		pointTypeOutlet.selectedSegmentIndex = params[2]
@@ -104,49 +103,54 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
     @IBAction func unwindToSetupMatch(segue: UIStoryboardSegue) {}
 	// Swap players on the same side
     @IBAction func swapPlayersButton(_ sender: UIButton) {
-		print("swapPlayersButton Worked")
-		swapSpots(t: sender.tag)
+		swapSpots(side: sender.tag)
     }
 	// Swap teams to different sides
 	@IBAction func swapSidesButton(_ sender: UIButton) {
-		print("swapSidesButton Worked")
 		swapSides()
 	}
-	@IBAction func posTypeButton(_ sender: UISegmentedControl) {
-		t = sender.selectedSegmentIndex
-		swapRef(t: t)
-//		defaultArray[0] = t
-//		matchDefaults.set(defaultArray, forKey: "defaultMatch")
-	}
-    @IBAction func matchTypeButton(_ sender: UISegmentedControl) {
-        t = sender.selectedSegmentIndex
-        let show = (t==0 ? false : true)
-        showDoubles(show: show)
-//		defaultArray[1] = t
-//		matchDefaults.set(defaultArray, forKey: "defaultMatch")
-    }
-    @IBAction func pointTypeButton(_ sender: UISegmentedControl) {
-//		t = sender.selectedSegmentIndex
-//		defaultArray[2] = t
-//		matchDefaults.set(defaultArray, forKey: "defaultMatch")
-	}
-    @IBAction func gameTypeButton(_ sender: UISegmentedControl) {
-//		t = sender.selectedSegmentIndex
-//		defaultArray[3] = t
-//		matchDefaults.set(defaultArray, forKey: "defaultMatch")
-	}
-	@IBAction func switchTypeButton(_ sender: UISegmentedControl) {
-//		t = sender.selectedSegmentIndex
-//		defaultArray[4] = t
-//		matchDefaults.set(defaultArray, forKey: "defaultMatch")
-	}
-    @IBAction func resetSetupButton(_ sender: UIButton) {
-        resetPlayerFields()			// reset player fields
-        showDoubles(show: false)	// show doubles buttons & fields
-        swapRef(t: 0)         		// reset ref and serv dot
+	// Reset to default match
+	@IBAction func resetSetupButton(_ sender: UIButton) {
+		resetPlayerFields()					// reset player fields
+		showDoubles(show: false)			// show doubles buttons & fields
+		swapRef(side: 0)         				// reset ref and serv dot
 		updateButtons(params: resetArray)	// reset button values
+	}
+	@IBAction func startMatchButton(_ sender: UIButton) {
+	}
+	// params[0]
+	@IBAction func posTypeButton(_ sender: UISegmentedControl) {
+		let s = sender.selectedSegmentIndex
+		swapRef(side: s)
+		paramsArray[0] = s
+		matchDefaults.set(paramsArray, forKey: "defaultParams")
+	}
+	// params[1]
+    @IBAction func matchTypeButton(_ sender: UISegmentedControl) {
+        let s = sender.selectedSegmentIndex
+        let show = (s==0 ? false : true)
+        showDoubles(show: show)
+		paramsArray[1] = s
+		matchDefaults.set(paramsArray, forKey: "defaultParams")
     }
-    @IBAction func startMatchButton(_ sender: UIButton) {}
+	// params[2]
+    @IBAction func pointTypeButton(_ sender: UISegmentedControl) {
+		let s = sender.selectedSegmentIndex
+		paramsArray[2] = s
+		matchDefaults.set(paramsArray, forKey: "defaultParams")
+	}
+	// params[3]
+    @IBAction func gameTypeButton(_ sender: UISegmentedControl) {
+		let s = sender.selectedSegmentIndex
+		paramsArray[3] = s
+		matchDefaults.set(paramsArray, forKey: "defaultParams")
+	}
+	// params[4]
+	@IBAction func switchTypeButton(_ sender: UISegmentedControl) {
+		let s = sender.selectedSegmentIndex
+		paramsArray[4] = s
+		matchDefaults.set(paramsArray, forKey: "defaultParams")
+	}
     
 	
     /*-Std Stuff-------------------------------------------------------------*/
@@ -154,15 +158,15 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         // Arrays
-        pTextArray = ipTextArray
+        pTextArray = p0TextArray
         pFieldArray = [p1Field,p2Field,p3Field,p4Field]
         dImageArray = [d1Image,d2Image]
         
         resetPlayerFields()     // fill in player fields
 		
 		// Update view with last selected parameters from UserDefaults
-		if let defaultArray = matchDefaults.array(forKey: "defaultMatch") as? [Int] {
-			updateButtons(params: defaultArray)
+		if let paramsArray = matchDefaults.array(forKey: "defaultParams") as? [Int] {
+			updateButtons(params: paramsArray)
 			// need to updateFields??
 		}
 		
@@ -219,12 +223,12 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 			// Adjust pNames for singles??
 			
 			// Save them to persistent UserDefaults
-			defaultArray = [p1,p2,p3,p4,p5]
-			matchDefaults.set(defaultArray, forKey: "defaultMatch")
+			paramsArray = [p1,p2,p3,p4,p5]
+			matchDefaults.set(paramsArray, forKey: "defaultParams")
 			
             // Create match, destination VC, and send it
-			let match_0 = Match(players: pTextArray, params: defaultArray)
-//			let match = Match(players: pTextArray, params: defaultArray)
+			let match_0 = Match(players: pTextArray, params: paramsArray)
+//			let match = Match(players: pTextArray, params: paramsArray)
             let matchVC = segue.destination as! MatchViewController
             matchVC.match_0 = match_0
 //			matchVC.match = match
