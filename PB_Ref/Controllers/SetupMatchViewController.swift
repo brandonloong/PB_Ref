@@ -59,6 +59,7 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 	}
 	// Update player fields
 	func updateFields(f: [String]) {
+		savePlayers(f)
 		for i in 0...3 {pFieldArray[i].text = f[i]}
 	}
 	// Check all fields for blanks, and reset with default text
@@ -78,13 +79,17 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 		swap1ButtonOutlet.isHidden = show
 	}
     // Save player names from text array into
-    func savePlayers() {
-        matchDefaults.set(pTextArray, forKey: "defaultPlayers")
+	func savePlayers(_ f: [String]) {
+        matchDefaults.set(f, forKey: "defaultPlayers")
     }
-	
+	// Save parameters for buttons
+	func saveButtons(_ p: [Int]) {
+		paramsArray = p
+		matchDefaults.set(p, forKey: "defaultParams")
+	}
 	// Update buttons to specified values
 	func updateButtons(params: [Int]) {
-		paramsArray = params	// save to defaults
+		saveButtons(params)
 		posTypeOutlet.selectedSegmentIndex = params[0]
 		matchTypeOutlet.selectedSegmentIndex = params[1]
 		pointTypeOutlet.selectedSegmentIndex = params[2]
@@ -107,9 +112,9 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 	@IBAction func resetSetupButton(_ sender: UIButton) {
 		pTextArray = p0TextArray			// reset player names
 		updateFields(f: pTextArray)			// update the fields
-		showDoubles(show: false)			// show doubles buttons & fields
-		swapRef(side: 0)         			// reset ref and serv dot
 		updateButtons(params: resetArray)	// reset button values
+		swapRef(side: 0)         			// reset ref and serv dot
+		showDoubles(show: false)			// show doubles buttons & fields
 	}
 	@IBAction func startMatchButton(_ sender: UIButton) {
 	}
@@ -176,8 +181,8 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 		} else {
 			textField.resignFirstResponder()
 		}
-		resetBlankFields()	// check all fields (be sure to check all)
-		savePlayers()		// save player names in defaults
+		resetBlankFields()			// check all fields (be sure to check all)
+		savePlayers(pTextArray)		// save player names in defaults
 //		print("tag \(textField.tag)")
 //		print(pTextArray)
 		return true

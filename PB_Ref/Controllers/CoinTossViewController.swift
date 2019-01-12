@@ -95,26 +95,32 @@ class CoinTossViewController: UIViewController {
 		randNumLabel2.backgroundColor = UIColor.white
 		randNumLabel2.textColor = UIColor.black
 	}
+	func stopTimers() {
+		timer1.invalidate(); timer2.invalidate()
+	}
 	
 	/*-IBActions----------------------------------------------------------------------------*/
 	// Pick a random team
 	@IBAction func pickTeamButton(_ sender: UIButton) {
+		stopTimers()
 		timer1 = Timer.scheduledTimer(timeInterval: dur_0, target: self, selector: #selector(CoinTossViewController.animateRandTeam), userInfo: nil, repeats: true)
 	}
 	// Generate a random number
 	@IBAction func randNumButton(_ sender: UIButton) {
+		stopTimers()
 		timer2 = Timer.scheduledTimer(timeInterval: dur_0, target: self, selector: #selector(CoinTossViewController.animateRandNum), userInfo: nil, repeats: true)
 	}
-	// Reset the screen
-	@IBAction func clearButton(_ sender: UIButton) {
+	// Redo everything
+	@IBAction func redoButton() {
 		// Eliminate any lingering timers
-		timer1.invalidate(); timer2.invalidate()
-		
+		stopTimers()
 		// Reset random num just to be sure of no memory effects
 		r1 = 0; r2 = 0
-		
 		// Toggle display
 		toggleViewOn(false)
+	}
+	@IBAction func returnButton(_ sender: UIButton) {
+		stopTimers()
 	}
 	
 	/*-Other Functions----------------------------------------------------------------------*/
@@ -124,5 +130,8 @@ class CoinTossViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+	// Stop timers if touches detected
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//		redoButton()
+	}
 }

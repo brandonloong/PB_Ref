@@ -964,6 +964,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="returnButton:" destination="RnS-EI-EYr" eventType="touchUpInside" id="qqi-ht-GFH"/>
                                     <segue destination="NUl-Lc-IAr" kind="unwind" unwindAction="unwindToSetupMatchWithSegue:" id="sjB-Wh-lSd"/>
                                 </connections>
                             </button>
@@ -984,7 +985,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="clearButton:" destination="RnS-EI-EYr" eventType="touchUpInside" id="Uux-TT-wZy"/>
+                                    <action selector="redoButton" destination="RnS-EI-EYr" eventType="touchUpInside" id="eWH-1r-4nM"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Step 1: Decide which team makes the call" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWp-mu-nqD">
