@@ -16,6 +16,7 @@ class CoinTossViewController: UIViewController {
 	@IBOutlet weak var randNumLabel: UILabel!
 	
 	// Variables
+	let dur_0 = 0.08
 	var r1 = 0, r2 = 0, iter = 1, nIter = 10    // nIter needs to be even
 	var timer1 = Timer(), timer2 = Timer()
 	
@@ -79,7 +80,7 @@ class CoinTossViewController: UIViewController {
 		chosenTeamLabel.backgroundColor = UIColor.black
 		chosenTeamLabel.textColor = UIColor.white
 		// Start animation
-		timer1 = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(CoinTossViewController.animateRandTeam), userInfo: nil, repeats: true)
+		timer1 = Timer.scheduledTimer(timeInterval: dur_0, target: self, selector: #selector(CoinTossViewController.animateRandTeam), userInfo: nil, repeats: true)
 		// Animation finished
 		iter = 0
 	}
@@ -88,13 +89,15 @@ class CoinTossViewController: UIViewController {
 		randNumLabel.backgroundColor = UIColor.black
 		randNumLabel.textColor = UIColor.white
 		// Start animation
-		timer2 = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(CoinTossViewController.animateRandNum), userInfo: nil, repeats: true)
+		timer2 = Timer.scheduledTimer(timeInterval: dur_0, target: self, selector: #selector(CoinTossViewController.animateRandNum), userInfo: nil, repeats: true)
 		// Animation finished
 		iter = 0
 	}
 	@IBAction func clearButton(_ sender: UIButton) {
 		// Stop animateRandNum() & reset labels
-		timer1.invalidate(); timer1.invalidate()
+		timer1.invalidate(); timer2.invalidate()
+		chosenTeamLabel.backgroundColor = UIColor.white
+		chosenTeamLabel.textColor = UIColor.black
 		randNumLabel.backgroundColor = UIColor.white
 		randNumLabel.textColor = UIColor.black
 		
@@ -109,13 +112,10 @@ class CoinTossViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     /*
