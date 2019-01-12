@@ -30,11 +30,12 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
     var activeTag = Int(), activeIndex = Int(), nextIndex = Int()
 	var activeField = UITextField()
     // Arrays
-    let p0TextArray = ["Player 1","Player 2","Player 3","Player 4"], resetArray = [0,0,0,0,0]
+    let p0TextArray = ["Player 1","Player 2","Player 3","Player 4"]
     var pTextArray = [String]()
     var pFieldArray = [UITextField](), dImageArray = [UIImageView]()
 	// UserDefaults for saving preferences
-	var paramsArray = [0,0,0,0,0]
+	let resetArray = [0,0,0,0,0]
+	var paramsArray = [0,0,0,0,0]	// paramsArray = [posType, matType, pointType, gameType, switchType]
 	let matchDefaults = UserDefaults.standard
 	
     /*-Functions-------------------------------------------------------------*/
