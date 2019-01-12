@@ -128,9 +128,8 @@ class MatchViewController: UIViewController {
     /*-Std Stuff-------------------------------------------------------------*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-        // Create arrays
+        // UI arrays
         scoreLabels = [s1Label,s2Label,s3Label]
         playerLabels = [p1Label,p2Label,p3Label,p4Label]
         serverDotImages = [p1DotImage,p2DotImage,p3DotImage,p4DotImage]
@@ -140,7 +139,6 @@ class MatchViewController: UIViewController {
 		gameRunners = [[t1G1Runner,t1G2Runner,t1G3Runner],[t2G1Runner,t2G2Runner,t2G3Runner]]
         TOLabels = [t1TOLabel,t1TOLabel]
 		
-		match = match_0
 		updateView()
 		print("New Match.posType: \(match!.posType), matchType: \(match!.matchType), pointType: \(match!.pointType), gameType: \(match!.gameType), switchType: \(match!.switchType), players: \(match!.playerNames)")
     }

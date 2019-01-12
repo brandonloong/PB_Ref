@@ -165,7 +165,7 @@ class Match {
 			
 			print("checkMatchOver()_match is over. matchOver:\(matchOver), matchWinner:\(matchWinner!)")
 		}
-		else {			// next game
+		else {		// next game
 			// new game popover screen
 			newGame()
 		}
