@@ -34,7 +34,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tourny_court_v2" translatesAutoresizingMaskIntoConstraints="NO" id="3wC-qS-OSd">
-                                <rect key="frame" x="50" y="98" width="314" height="124"/>
+                                <rect key="frame" x="69.666666666666686" y="98" width="275" height="124"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="275" id="3ae-8c-6FY"/>
                                     <constraint firstAttribute="height" constant="124" id="ZP2-dN-vee"/>
@@ -64,13 +64,12 @@
                             <constraint firstItem="4Ai-yX-ES1" firstAttribute="top" secondItem="rsw-iy-UAf" secondAttribute="bottom" constant="10" id="CKq-tv-uSz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4Ai-yX-ES1" secondAttribute="trailing" constant="16" id="FPO-lT-oXF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hOe-Zh-khN" secondAttribute="trailing" constant="16" id="FaV-CL-sSW"/>
-                            <constraint firstItem="3wC-qS-OSd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="IHo-oE-hoc"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3wC-qS-OSd" secondAttribute="trailing" constant="50" id="JFR-nK-VBr"/>
                             <constraint firstItem="rsw-iy-UAf" firstAttribute="top" secondItem="3wC-qS-OSd" secondAttribute="bottom" constant="92" id="YLb-vp-b3Q"/>
                             <constraint firstItem="hOe-Zh-khN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Ynh-UG-4LS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rsw-iy-UAf" secondAttribute="trailing" constant="16" id="cEG-yp-pFx"/>
                             <constraint firstItem="3wC-qS-OSd" firstAttribute="top" secondItem="hOe-Zh-khN" secondAttribute="bottom" constant="48" id="gIu-9j-hfA"/>
                             <constraint firstItem="hOe-Zh-khN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="ihl-Tj-6nu"/>
+                            <constraint firstItem="3wC-qS-OSd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kPJ-Ux-oj2"/>
                             <constraint firstItem="4Ai-yX-ES1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="ru1-En-mHH"/>
                             <constraint firstItem="rsw-iy-UAf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="unN-BP-Iwn"/>
                         </constraints>
