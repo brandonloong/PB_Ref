@@ -21,12 +21,10 @@ class CoinTossViewController: UIViewController {
 	
 	// Variables
 	let dur_0 = 0.08
-	var r1 = 0, r2 = 0, iter = 1, nIter = 10    // nIter needs to be even
+	var r1 = 0, r2 = 0, iter = 1, nIter = 10    // keep nIter an even number
 	var timer1 = Timer(), timer2 = Timer()
 	
-	/*------------------------------------------------------------------------------------------------*/
-	// Functions
-	
+	/*-Functions---------------------------------------------------------------------------------*/
 	// Team timer1 delay
 	@objc func animateRandTeam() {
 		if iter > nIter {		// keep final iter even so that label will return to default colors
@@ -83,6 +81,7 @@ class CoinTossViewController: UIViewController {
 		
 		// Reset colors
 		defaultColors()
+		
 		// Reset text
 		if status {
 			chosenTeamLabel.text = "?"
@@ -100,17 +99,15 @@ class CoinTossViewController: UIViewController {
 	/*-IBActions----------------------------------------------------------------------------*/
 	// Pick a random team
 	@IBAction func pickTeamButton(_ sender: UIButton) {
-		// Start timer
 		timer1 = Timer.scheduledTimer(timeInterval: dur_0, target: self, selector: #selector(CoinTossViewController.animateRandTeam), userInfo: nil, repeats: true)
 	}
 	// Generate a random number
 	@IBAction func randNumButton(_ sender: UIButton) {
-		// Start timer
 		timer2 = Timer.scheduledTimer(timeInterval: dur_0, target: self, selector: #selector(CoinTossViewController.animateRandNum), userInfo: nil, repeats: true)
 	}
 	// Reset the screen
 	@IBAction func clearButton(_ sender: UIButton) {
-		// Stop any lingering timers
+		// Eliminate any lingering timers
 		timer1.invalidate(); timer2.invalidate()
 		
 		// Reset random num just to be sure of no memory effects
@@ -120,25 +117,12 @@ class CoinTossViewController: UIViewController {
 		toggleViewOn(false)
 	}
 	
-	/*-------------------------------------------------------------------------------------*/
-	// Standard stuff
-	
+	/*-Other Functions----------------------------------------------------------------------*/
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
