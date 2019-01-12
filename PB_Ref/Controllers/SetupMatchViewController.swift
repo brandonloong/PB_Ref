@@ -141,14 +141,14 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
         pFieldArray = [p1Field,p2Field,p3Field,p4Field]
         dImageArray = [d1Image,d2Image]
 		
-		// Update view with last selected parameters from persistent storage
+		// Update buttons with last selected parameters
 		if let paramsArray = matchDefaults.array(forKey: "defaultParams") as? [Int] {
 			updateButtons(params: paramsArray)
 		}
 		if let players = matchDefaults.array(forKey: "defaultPlayers") as? [String] {
 			pTextArray = players
 		}
-		
+		swapRef(side: paramsArray[0])	// update ref position
 		updateFields(f: pTextArray)     // fill in player fields
 		
 		// Delegate control of keyboard to SetupMatchVC (or drag fields to VC-delegate in IB)
