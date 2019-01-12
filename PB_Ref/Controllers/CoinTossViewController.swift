@@ -12,8 +12,12 @@ class CoinTossViewController: UIViewController {
 	
 	// Labels, fields, images
 	@IBOutlet weak var chosenTeamLabel: UILabel!
+	@IBOutlet weak var step1ResultLabel: UILabel!
 	@IBOutlet weak var step2Label: UILabel!
-	@IBOutlet weak var randNumLabel: UILabel!
+	@IBOutlet weak var randNumButtonOutlet: UIButton!
+	@IBOutlet weak var randNumLabel1: UILabel!
+	@IBOutlet weak var randNumLabel2: UILabel!
+	@IBOutlet weak var randNumLabel3: UILabel!
 	
 	// Variables
 	let dur_0 = 0.08
@@ -26,88 +30,97 @@ class CoinTossViewController: UIViewController {
 	// Team timer1 delay
 	@objc func animateRandTeam() {
 		if iter > nIter {		// keep final iter even so that label will return to default colors
-			// Animation finished
+			// Timer finish
 			timer1.invalidate()
-			step2Label.text = "Step 2: Team \(r1) picks a number (1 or 2)"
-		}
-		else {
-			r1 = Int(arc4random_uniform(2)) + 1		// choose random number between 1-2
+			step1ResultLabel.text = "Team \(r1) picks a number (1 or 2)"
+			toggleViewOn(true)
+			iter = 0
+		} else {
+			// Timer continue
+			r1 = Int(arc4random_uniform(2)) + 1
 			chosenTeamLabel.text = "Team \(r1)"
-			
-			if (iter%2) == 0 {	// alternate background/text colors every iter
-				chosenTeamLabel.backgroundColor = UIColor.white
-				chosenTeamLabel.textColor = UIColor.black
-			} else {
-				chosenTeamLabel.backgroundColor = UIColor.black
-				chosenTeamLabel.textColor = UIColor.white
-			}
+			alternateColors(label: chosenTeamLabel, count: iter)
 		}
 		iter += 1
 	}
-	// Number timer1 delay
+	// Number timer2 delay
 	@objc func animateRandNum() {
-		if iter > nIter {		// keep final iter even so that label will return to default colors
-			// Animation finished
+		if iter > nIter {		// keep iter=even so the label will return to default colors
+			// Timer finish
 			timer2.invalidate()
-			randNumLabel.backgroundColor = UIColor.white
-			randNumLabel.text = "\(r2)"
-		}
-		else {
-			r2 = Int(arc4random_uniform(2)) + 1		// choose random number between 1-2
-			randNumLabel.text = "\(r2)"
-			
-			if (iter%2) == 0 {	// alternate background/text colors every iter
-				randNumLabel.backgroundColor = UIColor.white
-				randNumLabel.textColor = UIColor.black
-			} else {
-				randNumLabel.backgroundColor = UIColor.black
-				randNumLabel.textColor = UIColor.white
-			}
+			randNumLabel2.text = "\(r2)"
+			defaultColors()
+			iter = 0
+		} else {
+			// Timer continue
+			r2 = Int(arc4random_uniform(2)) + 1
+			randNumLabel2.text = "\(r2)"
+			alternateColors(label: randNumLabel2, count: iter)
 		}
 		iter += 1
 	}
-	
-	/*------------------------------------------------------------------------------------------------*/
-	// Buttons
-	
-	@IBAction func pickTeamButton(_ sender: UIButton) {
-		// Simple function (non-animated)
-		//r1 = Int(arc4random_uniform(2)) + 1
-		//chosenTeamLabel.text = "Team \(r1)"
-		//step2Label.text = "Step 2: Team \(r1) picks a number (1 or 2)"
+	// Alternate colors while timer runs
+	func alternateColors(label: UILabel, count: Int) {
+		if (count%2) == 0 {
+			label.backgroundColor = UIColor.white
+			label.textColor = UIColor.black
+		} else {
+			label.backgroundColor = UIColor.black
+			label.textColor = UIColor.white
+		}
+	}
+	// Toggle display elements on or off
+	func toggleViewOn(_ show: Bool) {
+		let status = !show
 		
-		// Prep label for animation
-		chosenTeamLabel.backgroundColor = UIColor.black
-		chosenTeamLabel.textColor = UIColor.white
-		// Start animation
-		timer1 = Timer.scheduledTimer(timeInterval: dur_0, target: self, selector: #selector(CoinTossViewController.animateRandTeam), userInfo: nil, repeats: true)
-		// Animation finished
-		iter = 0
+		// Show/hide views
+		step1ResultLabel.isHidden = status
+		step2Label.isHidden = status
+		randNumButtonOutlet.isHidden = status
+		randNumLabel1.isHidden = status
+		randNumLabel2.isHidden = status
+		randNumLabel3.isHidden = status
+		
+		// Reset colors
+		defaultColors()
+		// Reset text
+		if status {
+			chosenTeamLabel.text = "?"
+			randNumLabel2.text = "?"
+		}
 	}
-	@IBAction func randNumButton(_ sender: UIButton) {
-		// Prep label for animation
-		randNumLabel.backgroundColor = UIColor.black
-		randNumLabel.textColor = UIColor.white
-		// Start animation
-		timer2 = Timer.scheduledTimer(timeInterval: dur_0, target: self, selector: #selector(CoinTossViewController.animateRandNum), userInfo: nil, repeats: true)
-		// Animation finished
-		iter = 0
-	}
-	@IBAction func clearButton(_ sender: UIButton) {
-		// Stop animateRandNum() & reset labels
-		timer1.invalidate(); timer2.invalidate()
+	// Default colors
+	func defaultColors() {
 		chosenTeamLabel.backgroundColor = UIColor.white
 		chosenTeamLabel.textColor = UIColor.black
-		randNumLabel.backgroundColor = UIColor.white
-		randNumLabel.textColor = UIColor.black
-		
-		r1 = 0; r2 = 0
-		chosenTeamLabel.text = "?"
-		step2Label.text = "Step 2: Team ? picks a number (1 or 2)"
-		randNumLabel.text = "?"
+		randNumLabel2.backgroundColor = UIColor.white
+		randNumLabel2.textColor = UIColor.black
 	}
 	
-	/*------------------------------------------------------------------------------------------------*/
+	/*-IBActions----------------------------------------------------------------------------*/
+	// Pick a random team
+	@IBAction func pickTeamButton(_ sender: UIButton) {
+		// Start timer
+		timer1 = Timer.scheduledTimer(timeInterval: dur_0, target: self, selector: #selector(CoinTossViewController.animateRandTeam), userInfo: nil, repeats: true)
+	}
+	// Generate a random number
+	@IBAction func randNumButton(_ sender: UIButton) {
+		// Start timer
+		timer2 = Timer.scheduledTimer(timeInterval: dur_0, target: self, selector: #selector(CoinTossViewController.animateRandNum), userInfo: nil, repeats: true)
+	}
+	// Reset the screen
+	@IBAction func clearButton(_ sender: UIButton) {
+		// Stop any lingering timers
+		timer1.invalidate(); timer2.invalidate()
+		
+		// Reset random num just to be sure of no memory effects
+		r1 = 0; r2 = 0
+		
+		// Toggle display
+		toggleViewOn(false)
+	}
+	
+	/*-------------------------------------------------------------------------------------*/
 	// Standard stuff
 	
     override func viewDidLoad() {
