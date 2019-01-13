@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6A15FF4321CD955C0015B272 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A15FF4221CD955C0015B272 /* Match.swift */; };
 		6A27354921CB339C00B57CA0 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A27354821CB339C00B57CA0 /* Team.swift */; };
-		6A27354F21CD5E6700B57CA0 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A27354E21CD5E6700B57CA0 /* Test.swift */; };
 		6A4536092169B84700A25670 /* TimeOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4536082169B84700A25670 /* TimeOutViewController.swift */; };
 		6A45360B2169BA0800A25670 /* CoinTossViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A45360A2169BA0800A25670 /* CoinTossViewController.swift */; };
 		6A45360D216A9ACE00A25670 /* GenInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A45360C216A9ACE00A25670 /* GenInfoViewController.swift */; };
@@ -26,7 +25,6 @@
 /* Begin PBXFileReference section */
 		6A15FF4221CD955C0015B272 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		6A27354821CB339C00B57CA0 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
-		6A27354E21CD5E6700B57CA0 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		6A4536082169B84700A25670 /* TimeOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeOutViewController.swift; sourceTree = "<group>"; };
 		6A45360A2169BA0800A25670 /* CoinTossViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinTossViewController.swift; sourceTree = "<group>"; };
 		6A45360C216A9ACE00A25670 /* GenInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenInfoViewController.swift; sourceTree = "<group>"; };
@@ -98,7 +96,6 @@
 				6AFD5A742166DE0D00072602 /* AppDelegate.swift */,
 				6AEB8E4621DFBA4300605C85 /* Controllers */,
 				6AEB8E4721DFBA6A00605C85 /* Data-Model */,
-				6A27354E21CD5E6700B57CA0 /* Test.swift */,
 				6AFD5A782166DE0D00072602 /* Main.storyboard */,
 				6AFD5A7B2166DE0D00072602 /* Assets.xcassets */,
 				6AFD5A7D2166DE0D00072602 /* LaunchScreen.storyboard */,
@@ -181,7 +178,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A27354921CB339C00B57CA0 /* Team.swift in Sources */,
-				6A27354F21CD5E6700B57CA0 /* Test.swift in Sources */,
 				6A15FF4321CD955C0015B272 /* Match.swift in Sources */,
 				6A45360B2169BA0800A25670 /* CoinTossViewController.swift in Sources */,
 				6AFD5A9F2166E07200072602 /* MatchViewController.swift in Sources */,
