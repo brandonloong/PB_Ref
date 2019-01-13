@@ -26,9 +26,11 @@ class MatchViewController: UIViewController {
 	@IBOutlet weak var t1RLabel: UILabel!; @IBOutlet weak var t2RLabel: UILabel!
 	@IBOutlet weak var t1Runner: UILabel!; @IBOutlet weak var t2Runner: UILabel!
 	@IBOutlet weak var t1G1Runner: UILabel!; @IBOutlet weak var t1G2Runner: UILabel!
-	@IBOutlet weak var t1G3Runner: UILabel!
+	@IBOutlet weak var t1G3Runner: UILabel!; @IBOutlet weak var t1G4Runner: UILabel!
+	@IBOutlet weak var t1G5Runner: UILabel!
 	@IBOutlet weak var t2G1Runner: UILabel!; @IBOutlet weak var t2G2Runner: UILabel!
-	@IBOutlet weak var t2G3Runner: UILabel!
+	@IBOutlet weak var t2G3Runner: UILabel!; @IBOutlet weak var t2G4Runner: UILabel!
+	@IBOutlet weak var t2G5Runner: UILabel!
 	@IBOutlet weak var t1TOLabel: UILabel!; @IBOutlet weak var t2TOLabel: UILabel!
 	@IBOutlet weak var gameClockButtonOutlet: UIButton!
 	
@@ -136,7 +138,7 @@ class MatchViewController: UIViewController {
         teamDotImages = [t1DotImage,t2DotImage]
         teamRunnerLabels = [t1RLabel,t2RLabel]
         teamRunners = [t1Runner,t2Runner]
-		gameRunners = [[t1G1Runner,t1G2Runner,t1G3Runner],[t2G1Runner,t2G2Runner,t2G3Runner]]
+		gameRunners = [[t1G1Runner,t1G2Runner,t1G3Runner,t1G4Runner,t1G5Runner],[t2G1Runner,t2G2Runner,t2G3Runner,t2G4Runner,t2G5Runner]]
         TOLabels = [t1TOLabel,t1TOLabel]
 		
 		updateView()
