@@ -112,7 +112,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="phO-ht-pzg"/>
                                         </constraints>
-                                        <inset key="imageEdgeInsets" minX="45" minY="9" maxX="45" maxY="8"/>
+                                        <inset key="imageEdgeInsets" minX="45" minY="10" maxX="45" maxY="10"/>
                                         <state key="normal" title="Swap Sides" image="tourny_swap_icon_v4">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -122,7 +122,7 @@
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IR2-Xk-kdj">
                                         <rect key="frame" x="357" y="35" width="57" height="180"/>
-                                        <inset key="imageEdgeInsets" minX="18" minY="32" maxX="5" maxY="32"/>
+                                        <inset key="imageEdgeInsets" minX="26" minY="60" maxX="10" maxY="60"/>
                                         <state key="normal" title="Button" image="tourny_swap_icon_v1"/>
                                         <connections>
                                             <action selector="swapPlayersButton:" destination="nyK-oP-jRM" eventType="touchUpInside" id="vRO-4q-ySZ"/>
@@ -130,7 +130,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoF-Vf-brJ">
                                         <rect key="frame" x="0.0" y="35" width="57" height="180"/>
-                                        <inset key="imageEdgeInsets" minX="5" minY="32" maxX="18" maxY="32"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="60" maxX="26" maxY="60"/>
                                         <state key="normal" title="Button" image="tourny_swap_icon_v2"/>
                                         <connections>
                                             <action selector="swapPlayersButton:" destination="nyK-oP-jRM" eventType="touchUpInside" id="7yj-rF-qxT"/>

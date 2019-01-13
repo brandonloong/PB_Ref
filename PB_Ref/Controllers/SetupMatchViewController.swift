@@ -27,7 +27,7 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var swap1ButtonOutlet: UIButton!
 	
     // Variables
-    var activeTag = Int(), activeIndex = Int(), nextIndex = Int()
+    var activeTag = Int(), activeIndex = Int(), nextIndex = Int(), nextTag = Int()
 	var activeField = UITextField()
     // Arrays
     let p0TextArray = ["Player 1","Player 2","Player 3","Player 4"]
@@ -171,35 +171,36 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 		activeTag = textField.tag
 		activeIndex = activeTag-1
 		nextIndex = (matchTypeOutlet.selectedSegmentIndex==0 ? (activeIndex+1)%4 : (activeIndex+2)%4)	// for singles, skip a field
+		nextTag = nextIndex+1
 	}
 	// Highlight next player field when pressing Enter (different for doubles or singles)
 	@discardableResult		// avoid usage warning on Bool output when using
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		// If the next field is default text, make it active on Return key
-		if pFieldArray[nextIndex].text == "Player \(nextIndex)" {
+		if pFieldArray[nextIndex].text == "Player \(nextTag)" {
 			textField.resignFirstResponder()
+			pFieldArray[nextIndex].text! = ""
 			pFieldArray[nextIndex].becomeFirstResponder()
+			print("nextIndex \(nextIndex)")
 		} else {
+			resetBlankFields()			// check all fields (be sure to check all)
+			savePlayers(pTextArray)		// save player names in defaults
 			textField.resignFirstResponder()
 		}
-		resetBlankFields()			// check all fields (be sure to check all)
-		savePlayers(pTextArray)		// save player names in defaults
-//		print("tag \(textField.tag)")
-//		print(pTextArray)
 		return true
 	}
     // Hide keyboard if touched outside of text field
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-		textFieldShouldReturn(activeField)
+//		textFieldShouldReturn(activeField)
+		resetBlankFields()			// check all fields (be sure to check all)
+		savePlayers(pTextArray)		// save player names in defaults
+		activeField.resignFirstResponder()
         self.view.endEditing(true)
     }
     // Pass new match object to MatchViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toMatchVC" {
 			// Adjust pNames for singles??
-			
-			// Save them to persistent UserDefaults
-//			matchDefaults.set(paramsArray, forKey: "defaultParams")
 			
             // Create match, destination VC, and send it
 			let match = Match(players: pTextArray, params: paramsArray)
