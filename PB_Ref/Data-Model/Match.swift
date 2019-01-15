@@ -9,13 +9,13 @@ import UIKit
 
 class Match {
     // New match parameters
-    let playerList: [String], posType: Int, matchType: Int, pointType: Int
-	let gameType: Int, switchType: Int
-    let winScore: Int, winGame: Int, maxGame: Int, switchScore: Int
-    let server0: Int?
-    
-	init(players: [String], params: [Int]) {
-        playerList = players
+    let playerList: [String]
+	let posType: Int, matchType: Int, pointType: Int, gameType: Int, switchType: Int
+    let winScore: Int, winGame: Int, maxGame: Int, switchScore: Int, server0: Int
+	
+	// Make arguments optional so object can be defined w/o parameters & reassigned later
+	init(players: [String] = ["Player 1","Player 2","Player 3","Player 4"], params: [Int] = [0,0,0,0,0]) {
+		playerList = players
 		posType = params[0]
         matchType = params[1]
         pointType = params[2]
@@ -175,7 +175,7 @@ class Match {
 		
 		// Reset all game stuff
 		score = [0,0,2]
-		server = server0!
+		server = server0
 		sidePos = posType
 		runnerText = [" 0"," 0"]//		clock = 0 (don't reset clock, just set a reference time of new game)
 		timeOuts = [2,2]

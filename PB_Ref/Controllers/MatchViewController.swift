@@ -35,7 +35,7 @@ class MatchViewController: UIViewController {
 	@IBOutlet weak var gameClockButtonOutlet: UIButton!
 	
     // Variables
-	var match : Match?
+	var match = Match()		// create default match, later modified by SetupVC
     var matchType = 0, scoreType = 0, gameType = 0, posType = 0, gTime = [0,0,0]
     var gNum = 0, show = Int(), hide = Int(), team1 = Int(), team2 = Int(), toTime = Int()
 	var timer1 = Timer(), timer2 = Timer(), timeOn = false
@@ -80,17 +80,17 @@ class MatchViewController: UIViewController {
 	}
 	// Start timeout timer
 	@objc func startTimeOut(t: Int) {
-		let current = match!.timeOuts[t]
+		let current = match.timeOuts[t]
 		if current == 0 {
 			timeOutAlert2 = UIAlertController(title: "Team \(t+1) is out of timeouts.", message: "Resume play", preferredStyle: .actionSheet)
 			timeOutAlert2.addAction(timeOutAction4)
 			present(timeOutAlert2, animated: true, completion: nil)
 			print("No timeouts remain for this team. Continue play.")
 		} else {
-			match!.timeOuts[t] = current-1
+			match.timeOuts[t] = current-1
 			toTime = 120		// 2 min timeout
 			
-			timeOutAlert2 = UIAlertController(title: "Timeout Countdown: 02:00", message: "Team \(t+1) has \(match!.timeOuts[t]) timeouts left.", preferredStyle: .actionSheet)
+			timeOutAlert2 = UIAlertController(title: "Timeout Countdown: 02:00", message: "Team \(t+1) has \(match.timeOuts[t]) timeouts left.", preferredStyle: .actionSheet)
 			let timeOutAction5 = UIAlertAction(title: "Stop Timeout and Resume Play", style: .default) { (UIAlertAction) in
 				self.timeOutInvalidate(tim: self.timer2, alert: self.timeOutAlert2)
 			}
@@ -120,51 +120,51 @@ class MatchViewController: UIViewController {
 	}
 	// Update view based on current match data
 	func updateView() {
-		show = match!.teamPos
+		show = match.teamPos
 		hide = (show+1)%2
 		
 		// Update game & score labels
-		gameNumLabel.text = "Game \(match!.gameIndex)"
-		scoreLabels[0].text = String(match!.score[show])
-		scoreLabels[1].text = String(match!.score[hide])
-		scoreLabels[2].text = String(match!.score[2])
+		gameNumLabel.text = "Game \(match.gameIndex)"
+		scoreLabels[0].text = String(match.score[show])
+		scoreLabels[1].text = String(match.score[hide])
+		scoreLabels[2].text = String(match.score[2])
 		// Server dots
 		for i in 0...3 {serverDotImages[i].isHidden = true}
-		serverDotImages[match!.server].isHidden = false
+		serverDotImages[match.server].isHidden = false
 		// Player positions
-		for i in 0...3 {playerLabels[i].text = match!.playerNames[i]}
+		for i in 0...3 {playerLabels[i].text = match.playerNames[i]}
 		// Referee direction
-		refImage.image = UIImage(named: "tourny_ref_icon_vp\(match!.sidePos)")
+		refImage.image = UIImage(named: "tourny_ref_icon_vp\(match.sidePos)")
 		
 		// Update team, timeouts, & game score runners
 		teamDotImages[show].isHidden = false		// show team stuff
 		teamRunnerLabels[show].textColor = UIColor.black
 		teamRunners[show].textColor = UIColor.black
-		teamRunners[show].text = match!.runnerText[show]
-		TOLabels[show].text = "\(match!.timeOuts[show])"
+		teamRunners[show].text = match.runnerText[show]
+		TOLabels[show].text = "\(match.timeOuts[show])"
 		teamDotImages[hide].isHidden = true			// hide team stuff
 		teamRunnerLabels[hide].textColor = UIColor.gray
 		teamRunners[hide].textColor = UIColor.gray
-		teamRunners[hide].text = match!.runnerText[hide]
-		TOLabels[hide].text = "\(match!.timeOuts[hide])"
-		showGameRunners(game: match!.gameIndex-1)
+		teamRunners[hide].text = match.runnerText[hide]
+		TOLabels[hide].text = "\(match.timeOuts[hide])"
+		showGameRunners(game: match.gameIndex-1)
 		
 		print("updateView: show \(show), hide \(hide)")
 	}
 	func showGameRunners(game: Int) {
-		gameRunners[show][game].text = "\(match!.score[show])"
-		gameRunners[hide][game].text = "\(match!.score[hide])"
+		gameRunners[show][game].text = "\(match.score[show])"
+		gameRunners[hide][game].text = "\(match.score[hide])"
 	}
 	
     /*-Buttons-------------------------------------------------------------*/
     // Point button
 	@IBAction func pointButton(_ sender: UIButton) {
-		match!.point()
+		match.point()
 		updateView()
     }
 	// Fault button
 	@IBAction func faultButton(_ sender: UIButton) {
-		match!.fault()
+		match.fault()
 		updateView()
 	}
 	// Game clock button
@@ -174,13 +174,13 @@ class MatchViewController: UIViewController {
 	// Timeout button
 	@IBAction func timeOutButton(_ sender: UIButton) {
 		let timeOutAlert1 = UIAlertController(title: "Which Team Called Timeout?", message: nil, preferredStyle: .alert)
-		let timeOutAction1 = UIAlertAction(title: "Team 1:  \(match!.playerList[0]), \(match!.playerList[1])", style: .default) { (UIAlertAction) in
+		let timeOutAction1 = UIAlertAction(title: "Team 1:  \(match.playerList[0])--\(match.playerList[1])", style: .default) { (UIAlertAction) in
 			self.startTimeOut(t: 0)
 			
 			print("timeOutButton: team 1")
 			self.updateView()
 		}
-		let timeOutAction2 = UIAlertAction(title: "Team 2:  \(match!.playerList[2]), \(match!.playerList[3])", style: .default) { (UIAlertAction) in
+		let timeOutAction2 = UIAlertAction(title: "Team 2:  \(match.playerList[2])--\(match.playerList[3])", style: .default) { (UIAlertAction) in
 			self.startTimeOut(t: 1)
 			
 			print("timeOutButton: team 1")
@@ -207,7 +207,7 @@ class MatchViewController: UIViewController {
         TOLabels = [t1TOLabel,t2TOLabel]
 		
 		updateView()
-		print("New Match.posType: \(match!.posType), matchType: \(match!.matchType), pointType: \(match!.pointType), gameType: \(match!.gameType), switchType: \(match!.switchType), players: \(match!.playerNames)")
+		print("New Match.posType: \(match.posType), matchType: \(match.matchType), pointType: \(match.pointType), gameType: \(match.gameType), switchType: \(match.switchType), players: \(match.playerNames)")
     }
 
     override func didReceiveMemoryWarning() {
