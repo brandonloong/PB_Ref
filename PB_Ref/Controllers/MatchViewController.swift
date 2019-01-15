@@ -39,12 +39,17 @@ class MatchViewController: UIViewController {
     var matchType = 0, scoreType = 0, gameType = 0, posType = 0, gTime = [0,0,0]
     var gNum = 0, show = Int(), hide = Int(), team1 = Int(), team2 = Int(), toTime = Int()
 	var timer1 = Timer(), timer2 = Timer(), timeOn = false
-	
     // Arrays
     var scoreLabels = [UILabel](), playerLabels = [UILabel]()
 	var serverDotImages = [UIImageView](), teamDotImages = [UIImageView]()
     var teamRunnerLabels = [UILabel](), teamRunners = [UILabel]()
 	var gameRunners = [[UILabel]](), TOLabels = [UILabel]()
+	// Other
+	let timeOutAction3 = UIAlertAction(title: "Cancel", style: .default) { (UIAlertAction) in
+	}
+	let timeOutAction4 = UIAlertAction(title: "Ok", style: .default) { (UIAlertAction) in
+	}
+	var timeOutAlert2 = UIAlertController()
     
 	/*-Functions-------------------------------------------------------------*/
     // Try to make functions only change display items, not do computation or change values of variables
@@ -77,26 +82,41 @@ class MatchViewController: UIViewController {
 	@objc func startTimeOut(t: Int) {
 		let current = match!.timeOuts[t]
 		if current == 0 {
-			titleLabel.text = "No timeouts remain for this team. Continue play."
+			timeOutAlert2 = UIAlertController(title: "Team \(t+1) is out of timeouts.", message: "Resume play", preferredStyle: .actionSheet)
+			timeOutAlert2.addAction(timeOutAction4)
+			present(timeOutAlert2, animated: true, completion: nil)
+			print("No timeouts remain for this team. Continue play.")
 		} else {
 			match!.timeOuts[t] = current-1
 			toTime = 120		// 2 min timeout
-			timer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(MatchViewController.increaseTimeOut), userInfo: nil, repeats: true)
-			titleLabel.text = "Team \(t+1) has \(match!.timeOuts[t]) timeouts remaining"
+			
+			timeOutAlert2 = UIAlertController(title: "Timeout Countdown: 02:00", message: "Team \(t+1) has \(match!.timeOuts[t]) timeouts left.", preferredStyle: .actionSheet)
+			let timeOutAction5 = UIAlertAction(title: "Stop Timeout and Resume Play", style: .default) { (UIAlertAction) in
+				self.timeOutInvalidate(tim: self.timer2, alert: self.timeOutAlert2)
+			}
+			timeOutAlert2.addAction(timeOutAction5)
+			present(timeOutAlert2, animated: true, completion: nil)
+			
+			timer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(MatchViewController.decreaseTimeOut), userInfo: nil, repeats: true)
 		}
 	}
 	// Increase timeout timer
-	@objc func increaseTimeOut() {
+	@objc func decreaseTimeOut() {
 		if toTime > -1 {		// Timer continue
 			let sec = String(format: "%02d", toTime % 60)	// update seconds label
 			let min = String(format: "%02d", toTime / 60)	// update minutes label
-			titleLabel.text = "Timeout Countdown: "+"\(min)"+":"+"\(sec)"
+			
+			timeOutAlert2.title = "Timeout Countdown: "+"\(min)"+":"+"\(sec)"
 			toTime -= 1
 		} else {			// Timer finish
-			timer2.invalidate()
-			titleLabel.text = ""
-			toTime = 120
+			timeOutInvalidate(tim: timer2, alert: timeOutAlert2)
+			timeOutAlert2.dismiss(animated: true, completion: nil)
 		}
+	}
+	func timeOutInvalidate(tim: Timer, alert: UIAlertController)  {
+		tim.invalidate()
+		alert.title = ""
+		toTime = 120
 	}
 	// Update view based on current match data
 	func updateView() {
@@ -153,25 +173,23 @@ class MatchViewController: UIViewController {
 	}
 	// Timeout button
 	@IBAction func timeOutButton(_ sender: UIButton) {
-		let timeOutAlert = UIAlertController(title: "Which team called the timeout?", message: nil, preferredStyle: .alert)
-		let timeOutAction1 = UIAlertAction(title: "Team 1: \(match!.playerList[0]), \(match!.playerList[1])", style: .default) { (UIAlertAction) in
+		let timeOutAlert1 = UIAlertController(title: "Which Team Called Timeout?", message: nil, preferredStyle: .alert)
+		let timeOutAction1 = UIAlertAction(title: "Team 1:  \(match!.playerList[0]), \(match!.playerList[1])", style: .default) { (UIAlertAction) in
 			self.startTimeOut(t: 0)
 			
 			print("timeOutButton: team 1")
 			self.updateView()
 		}
-		let timeOutAction2 = UIAlertAction(title: "Team 2: \(match!.playerList[2]), \(match!.playerList[3])", style: .default) { (UIAlertAction) in
+		let timeOutAction2 = UIAlertAction(title: "Team 2:  \(match!.playerList[2]), \(match!.playerList[3])", style: .default) { (UIAlertAction) in
 			self.startTimeOut(t: 1)
 			
 			print("timeOutButton: team 1")
 			self.updateView()
 		}
-		let timeOutAction3 = UIAlertAction(title: "Cancel", style: .default) { (UIAlertAction) in
-		}
-		timeOutAlert.addAction(timeOutAction1)
-		timeOutAlert.addAction(timeOutAction2)
-		timeOutAlert.addAction(timeOutAction3)
-		present(timeOutAlert, animated: true, completion: nil)
+		timeOutAlert1.addAction(timeOutAction1)
+		timeOutAlert1.addAction(timeOutAction2)
+		timeOutAlert1.addAction(timeOutAction3)
+		present(timeOutAlert1, animated: true, completion: nil)
 	}
 	
     /*-Std Stuff-------------------------------------------------------------*/
