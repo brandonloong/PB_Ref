@@ -22,7 +22,7 @@ class Match {
         gameType = params[3]
 		switchType = params[4]
 		
-		// Calculate match parameters
+		// Calculate new match parameters
 		playerNames = playerList
 		winScore = (pointType==0 ? 11 : 15)	// ending game score
 		switchScore = (pointType==0 ? 6 : 8)
@@ -30,7 +30,7 @@ class Match {
 		maxGame = 2*gameType + 1	// 1, 3, or 5 games possible
 		server0 = (posType==0 ? 0 : 2)		// initial server position
 		
-		// Calculate initial match variables
+		// Calculate new match variables
 		gamesWon = [0,0]
 		gameIndex = 0
 		switchedAlready = false
@@ -46,10 +46,10 @@ class Match {
 //	var stateTuple2: [(gameOver: Bool, gameIndex: Int)] = []
 //	var stateTuple3: [(gamesWon: [Int])] = []
 //	var stateTuple: [[()]]
-	var resultsTuple1: [(matchWinner: Int, gameScores: [[Int]], runnerHistory: [[String]], rCountHistory: [Int], scoreDiffHistory: [Int])] = []
+//	var resultsTuple1: [(matchWinner: Int, gameScores: [[Int]], runnerHistory: [[String]], rCountHistory: [Int], scoreDiffHistory: [Int])] = []
 	
 	// stateArray data (eventually delete in favor of stateArrays)
-    var score = [Int](), server = Int(), sidePos = Int(), teamPos = Int()
+    var score = [Int](), server = Int(), sidePos = Int(), teamPos = Int(), timeOuts = [Int]()
 	var rCount = Int(), playerSpots = [Int](), clock = Int()
 	var runnerText = [String](), switchedAlready = Bool()
 	var gamesWon = [Int](), gameIndex = Int(), gameScores = [[Int]]()
@@ -63,7 +63,7 @@ class Match {
 	var playerNames = [String](), maxScore = Int(), show = Int(), hide = Int()
 	var isOddGame = Bool(), matchOver = Bool(), count = Int()
 	
-	/*----------------------------------------------------------------------*/
+	/*-Point Functions---------------------------------------------------------------------*/
     func point() {
 		if !gameOver {		// continue game
 			//verify sidePos is set correctly before this is called
@@ -78,8 +78,7 @@ class Match {
 			rCount += 1
 		} else {			// game is over
 			checkMatchOver()
-			
-			print("point()_gameOver")
+			print("point: game is over")
 		}
     }
 	// Update runner text for adding a point with sideout character
@@ -116,7 +115,7 @@ class Match {
 			server = (server+2)%4   // move server to other side
 			sidePos = (sidePos+1)%2	// move posession to other side
 			swapSides()             // move player spots
-			print("checkLastGame()_switch sides")
+			print("checkLastGame: switch sides")
 		}
 	}
 	// Rotate player spots: add 2 to every player spot mod 4
@@ -132,7 +131,7 @@ class Match {
 			if scoreDiff >= 2 {			// game won
 				gameOver = true
 				saveGame()			// Save game info
-				print("checkGameOver()_game is over")
+				print("checkGameOver: game is over")
 			}
 		}
 	}
@@ -155,33 +154,32 @@ class Match {
 			matchWinner = teamPos
 			
 			// Match Over popup
-			let matchOverAlert = UIAlertController(title: "Match Over", message: "Team \(teamPos+1) Wins", preferredStyle: .alert)
-			let restartNewMatch = UIAlertAction(title: "Restart Match", style: .default, handler: { (UIAlertAction) in self.newMatch()})
-			let seeMatchSummary = UIAlertAction(title: "Match Statistics", style: .default) { (UIAlertAction) in
-				//code
-			}
-			matchOverAlert.addAction(restartNewMatch)
-			matchOverAlert.addAction(seeMatchSummary)
+//			let matchOverAlert = UIAlertController(title: "Match Over", message: "Team \(teamPos+1) Wins", preferredStyle: .alert)
+//			let restartNewMatch = UIAlertAction(title: "Restart Match", style: .default, handler: { (UIAlertAction) in self.newMatch()})
+//			let seeMatchSummary = UIAlertAction(title: "Match Statistics", style: .default) { (UIAlertAction) in
+//				//code
+//			}
+//			matchOverAlert.addAction(restartNewMatch)
+//			matchOverAlert.addAction(seeMatchSummary)
 			
-			print("checkMatchOver()_match is over. matchOver:\(matchOver), matchWinner:\(matchWinner!)")
+			print("checkMatchOver: match is over. matchOver:\(matchOver), matchWinner:\(matchWinner!)")
 		}
 		else {		// next game
 			// new game popover screen
 			newGame()
 		}
 	}
-	func newMatch() {
-		
-	}
 	// Create a new game within the match
 	func newGame() {
 		gameIndex += 1			// increase game count
 		
 		// Reset all game stuff
-		score = [0,0,2];			server = server0!
-		sidePos = posType;			rCount = 0
+		score = [0,0,2]
+		server = server0!
+		sidePos = posType
 		runnerText = [" 0"," 0"]//		clock = 0 (don't reset clock, just set a reference time of new game)
-		scoreDiff = 0;	maxScore = 0;	gameOver = false
+		timeOuts = [2,2]
+		rCount = 0;	scoreDiff = 0;	maxScore = 0;	gameOver = false
 		
 		// Odd games [1,3,5], even games [2,4]
 		if gameIndex%2 == 1 {		// odd game indices
@@ -195,28 +193,26 @@ class Match {
 		}
 		
 		playerNames = playerSpots.map( {playerList[$0]} ) // update names
-		print("NewGame(). score:\(score), server:\(server), sidePos:\(sidePos), gameIndex:\(gameIndex)")
+		print("newGame. score:\(score), server:\(server), sidePos:\(sidePos), gameIndex:\(gameIndex)")
 	}
-	/*----------------------------------------------------------------------*/
+	
+	/*-Fault Functions---------------------------------------------------------------*/
     func fault() {
 		if !gameOver {		// continue game
 			if score[2] == 1 {  // second server
 				score[2] = 2
 				swapServer(side: sidePos)
-//				print("fault()_2nd server")
 			} else {            // sideout
 				sideOut()
-//				print("fault()_sideout")
 			}
 			// create master array variable for all information to save state of match here
 			rCount += 1
 		} else {			// game is over
-			print("fault()_gameOver")
+			print("fault_gameOver")
 		}
     }
     // Do sideout, move ball to other side
     func sideOut() {
-        //score.swapAt(0,1)
         score[2] = 1
 		sideOutRunner()
 		sidePos = (sidePos+1)%2
@@ -230,4 +226,6 @@ class Match {
             runnerText[teamPos] = txt + "/"
         }
     }
+	
+	/*-Other Functions---------------------------------------------------------------*/
 }
