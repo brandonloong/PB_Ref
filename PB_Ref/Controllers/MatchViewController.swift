@@ -174,16 +174,12 @@ class MatchViewController: UIViewController {
 	// Timeout button
 	@IBAction func timeOutButton(_ sender: UIButton) {
 		let timeOutAlert1 = UIAlertController(title: "Which Team Called Timeout?", message: nil, preferredStyle: .alert)
-		let timeOutAction1 = UIAlertAction(title: "Team 1:  \(match.playerList[0])--\(match.playerList[1])", style: .default) { (UIAlertAction) in
+		let timeOutAction1 = UIAlertAction(title: "Team 1:  " + match.teamNames[0], style: .default) { (UIAlertAction) in
 			self.startTimeOut(t: 0)
-			
-			print("timeOutButton: team 1")
 			self.updateView()
 		}
-		let timeOutAction2 = UIAlertAction(title: "Team 2:  \(match.playerList[2])--\(match.playerList[3])", style: .default) { (UIAlertAction) in
+		let timeOutAction2 = UIAlertAction(title: "Team 2:  " + match.teamNames[1], style: .default) { (UIAlertAction) in
 			self.startTimeOut(t: 1)
-			
-			print("timeOutButton: team 1")
 			self.updateView()
 		}
 		timeOutAlert1.addAction(timeOutAction1)

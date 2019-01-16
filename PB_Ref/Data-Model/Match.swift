@@ -24,17 +24,18 @@ class Match {
 		
 		// Calculate new match parameters
 		playerNames = playerList
-		winScore = (pointType==0 ? 11 : 15)	// ending game score
+		winScore = (pointType==0 ? 11 : 15)		// ending game score
 		switchScore = (pointType==0 ? 6 : 8)
 		winGame = gameType+1		// 1, 2, or 3 games needed for team to win
 		maxGame = 2*gameType + 1	// 1, 3, or 5 games possible
-		server0 = (posType==0 ? 0 : 2)		// initial server position
+		server0 = (posType==0 ? 0 : 2)			// initial server position
 		
 		// Calculate new match variables
 		gamesWon = [0,0]
 		gameIndex = 0
 		switchedAlready = false
 		matchOver = false
+		determineTeamPlayers()
 		
 		// Create first game
 		newGame()
@@ -60,8 +61,8 @@ class Match {
 	var rCountHistory = [Int](), scoreDiff = Int(), scoreDiffHistory = [Int]()
 	
 	// Non-array data (just use for convenient usage)
-	var playerNames = [String](), maxScore = Int(), show = Int(), hide = Int()
-	var isOddGame = Bool(), matchOver = Bool(), count = Int()
+	var playerNames = [String](), teamNames = [String](), maxScore = Int()
+	var show = Int(), hide = Int(), isOddGame = Bool(), matchOver = Bool(), count = Int()
 	
 	/*-Point Functions---------------------------------------------------------------------*/
     func point() {
@@ -92,9 +93,9 @@ class Match {
 	}
 	// Switch player spots on same side when serving team wins a point
 	func swapPlayers() {
-		if sidePos == 0 {  // swap left side
+		if sidePos == 0 {	// swap left side
 			playerSpots.swapAt(0,1)
-		} else {        // swap right side
+		} else {        	// swap right side
 			playerSpots.swapAt(2,3)
 		}
 		playerNames = playerSpots.map( {playerList[$0]} ) // update names
@@ -128,7 +129,7 @@ class Match {
 		maxScore = max(score[0],score[1])
 		if maxScore >= winScore {
 			scoreDiff = abs(score[0]-score[1])    // score differential
-			if scoreDiff >= 2 {			// game won
+			if scoreDiff >= 2 {		// game won
 				gameOver = true
 				saveGame()			// Save game info
 				print("checkGameOver: game is over")
@@ -182,23 +183,23 @@ class Match {
 		rCount = 0;	scoreDiff = 0;	maxScore = 0;	gameOver = false
 		
 		// Odd games [1,3,5], even games [2,4]
-		if gameIndex%2 == 1 {		// odd game indices
-			playerSpots = [0,1,2,3] // default spots
+		if gameIndex%2 == 1 {			// odd game indices
+			playerSpots = [0,1,2,3] 	// default spots
 			isOddGame = true
 			teamPos = 0
-		} else {            		// even game indices
-			playerSpots = [2,3,0,1] // switched spots
+		} else {            			// even game indices
+			playerSpots = [2,3,0,1] 	// switched spots
 			isOddGame = false
 			teamPos = 1
 		}
 		
-		playerNames = playerSpots.map( {playerList[$0]} ) // update names
+		playerNames = playerSpots.map( {playerList[$0]} )	// update names
 		print("newGame. score:\(score), server:\(server), sidePos:\(sidePos), gameIndex:\(gameIndex)")
 	}
 	
 	/*-Fault Functions---------------------------------------------------------------*/
     func fault() {
-		if !gameOver {		// continue game
+		if !gameOver {			// continue game
 			if score[2] == 1 {  // second server
 				score[2] = 2
 				swapServer(side: sidePos)
@@ -207,7 +208,7 @@ class Match {
 			}
 			// create master array variable for all information to save state of match here
 			rCount += 1
-		} else {			// game is over
+		} else {				// game is over
 			print("fault_gameOver")
 		}
     }
@@ -228,4 +229,11 @@ class Match {
     }
 	
 	/*-Other Functions---------------------------------------------------------------*/
+	func determineTeamPlayers() {
+		if posType == 0 {
+			teamNames = ["\(playerList[0]), \(playerList[1])","\(playerList[2]), \(playerList[3])"]
+		} else {
+			teamNames = ["\(playerList[2]), \(playerList[3])","\(playerList[0]), \(playerList[1])"]
+		}
+	}
 }
