@@ -1569,7 +1569,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cY8-Dp-nQU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="NHl-4y-eeH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1781.1594202898552" y="114.94565217391305"/>
+            <point key="canvasLocation" x="1768" y="115"/>
         </scene>
         <!--Coin Toss View Controller-->
         <scene sceneID="ISF-zI-JrV">
@@ -2275,7 +2275,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OPB-o1-Pht" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="HY8-F1-Ry5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1781.5999999999999" y="814.54272863568224"/>
+            <point key="canvasLocation" x="2451" y="115"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="l0B-k9-VsB">
