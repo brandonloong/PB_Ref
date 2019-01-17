@@ -203,7 +203,7 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 			// Adjust pNames for singles??
 			
             // Create match, destination VC, and send it
-			let match = Match(players: pTextArray, params: paramsArray)
+			let match = Doubles(players: pTextArray, params: paramsArray)
             let matchVC = segue.destination as! MatchViewController
 			matchVC.match = match
         }

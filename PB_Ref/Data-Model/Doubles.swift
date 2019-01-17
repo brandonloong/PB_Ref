@@ -1,5 +1,5 @@
 //
-//  Singles.swift
+//  Doubles.swift
 //  PB_Ref
 //
 //  Created by Brandon Loong on 1/16/19.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-class Singles: Match {
+class Doubles: Match {
 	
 }

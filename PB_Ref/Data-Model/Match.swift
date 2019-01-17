@@ -1,13 +1,13 @@
 //
-//  DoublesMatch.swift
+//  Match.swift
 //  PBRef
 //
 //  Created by Brandon Loong on 12/21/18.
 //  Copyright © 2018 Kayan. All rights reserved.
 //
-import UIKit
+import Foundation
 
-class DoublesMatch {
+class Match {
     // New match parameters
     let playerList: [String]
 	let posType: Int, matchType: Int, pointType: Int, gameType: Int, switchType: Int
