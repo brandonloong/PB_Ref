@@ -1,5 +1,5 @@
 //
-//  Match.swift
+//  DoublesMatch.swift
 //  PBRef
 //
 //  Created by Brandon Loong on 12/21/18.
@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class Match {
+class DoublesMatch {
     // New match parameters
     let playerList: [String]
 	let posType: Int, matchType: Int, pointType: Int, gameType: Int, switchType: Int
