@@ -11,9 +11,9 @@ import UIKit
 class ViewController: UIViewController {
     
     // Unwind segue to main menu
-    @IBAction func unwindToMainMenu(segue: UIStoryboardSegue) {
-        //print("Unwind to FirstViewController")
-    }
+	@IBAction func unwindToMainMenu(segue: UIStoryboardSegue) {
+		print("Yes, this func matters")
+	}
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
