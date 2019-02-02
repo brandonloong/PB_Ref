@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  PBRef
+//  PB_Ref
 //
-//  Created by Brandon Loong on 10/4/18.
-//  Copyright © 2018 Kayan. All rights reserved.
+//  Created by Brandon Loong on 12/26/18.
+//  Copyright © 2018 Brandon Loong. All rights reserved.
 //
 
 import UIKit

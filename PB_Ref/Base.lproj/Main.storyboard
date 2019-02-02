@@ -1389,7 +1389,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o6w-X5-x16">
-                                        <rect key="frame" x="20" y="36" width="175" height="56"/>
+                                        <rect key="frame" x="219" y="36" width="175" height="56"/>
                                         <state key="normal" title="Point"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -1408,7 +1408,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UtC-Zs-H0l">
-                                        <rect key="frame" x="219" y="36" width="175" height="56"/>
+                                        <rect key="frame" x="20" y="36" width="175" height="56"/>
                                         <state key="normal" title="Fault"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -1422,20 +1422,20 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="UtC-Zs-H0l" secondAttribute="trailing" constant="20" id="0Qi-ll-G3w"/>
-                                    <constraint firstItem="UtC-Zs-H0l" firstAttribute="top" secondItem="N1d-bH-Rhi" secondAttribute="bottom" constant="8" id="7K0-Xd-i8p"/>
-                                    <constraint firstItem="o6w-X5-x16" firstAttribute="top" secondItem="N1d-bH-Rhi" secondAttribute="bottom" constant="8" id="7Qx-98-Nwu"/>
-                                    <constraint firstItem="UtC-Zs-H0l" firstAttribute="leading" secondItem="glM-T2-dIN" secondAttribute="trailing" constant="8" id="9j7-R2-Jeu"/>
+                                    <constraint firstAttribute="bottom" secondItem="o6w-X5-x16" secondAttribute="bottom" constant="8" id="5xj-me-Ybd"/>
+                                    <constraint firstAttribute="trailing" secondItem="o6w-X5-x16" secondAttribute="trailing" constant="20" id="7TB-hW-dnr"/>
                                     <constraint firstItem="glM-T2-dIN" firstAttribute="top" secondItem="N1d-bH-Rhi" secondAttribute="bottom" constant="8" id="CJU-qP-ria"/>
                                     <constraint firstAttribute="trailing" secondItem="N1d-bH-Rhi" secondAttribute="trailing" constant="8" id="FHF-hE-gHr"/>
+                                    <constraint firstItem="o6w-X5-x16" firstAttribute="top" secondItem="N1d-bH-Rhi" secondAttribute="bottom" constant="8" id="IxA-f6-oIU"/>
                                     <constraint firstItem="glM-T2-dIN" firstAttribute="centerX" secondItem="TvD-iF-4gR" secondAttribute="centerX" id="MaC-Mm-xH5"/>
-                                    <constraint firstItem="glM-T2-dIN" firstAttribute="leading" secondItem="o6w-X5-x16" secondAttribute="trailing" constant="8" id="NDw-0c-9Xv"/>
-                                    <constraint firstAttribute="bottom" secondItem="UtC-Zs-H0l" secondAttribute="bottom" constant="8" id="OED-PD-i3t"/>
-                                    <constraint firstItem="o6w-X5-x16" firstAttribute="leading" secondItem="TvD-iF-4gR" secondAttribute="leading" constant="20" id="c8i-MO-ERa"/>
+                                    <constraint firstItem="UtC-Zs-H0l" firstAttribute="top" secondItem="N1d-bH-Rhi" secondAttribute="bottom" constant="8" id="NEH-fX-lus"/>
+                                    <constraint firstItem="UtC-Zs-H0l" firstAttribute="leading" secondItem="TvD-iF-4gR" secondAttribute="leading" constant="20" id="abc-ul-rmP"/>
                                     <constraint firstItem="N1d-bH-Rhi" firstAttribute="top" secondItem="TvD-iF-4gR" secondAttribute="top" constant="8" id="eP0-Ew-lNc"/>
-                                    <constraint firstAttribute="bottom" secondItem="o6w-X5-x16" secondAttribute="bottom" constant="8" id="eXE-MT-G91"/>
+                                    <constraint firstItem="glM-T2-dIN" firstAttribute="leading" secondItem="UtC-Zs-H0l" secondAttribute="trailing" constant="8" id="krJ-17-r8q"/>
                                     <constraint firstItem="N1d-bH-Rhi" firstAttribute="leading" secondItem="TvD-iF-4gR" secondAttribute="leading" constant="8" id="oz0-Ee-gtX"/>
                                     <constraint firstAttribute="bottom" secondItem="glM-T2-dIN" secondAttribute="bottom" constant="8" id="sNV-eF-YZO"/>
+                                    <constraint firstItem="o6w-X5-x16" firstAttribute="leading" secondItem="glM-T2-dIN" secondAttribute="trailing" constant="8" id="sgQ-X9-nja"/>
+                                    <constraint firstAttribute="bottom" secondItem="UtC-Zs-H0l" secondAttribute="bottom" constant="8" id="xXt-gh-ED8"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PIV-fv-F9O" userLabel="BottomView">

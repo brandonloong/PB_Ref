@@ -35,7 +35,7 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
     var pFieldArray = [UITextField](), dImageArray = [UIImageView]()
 	// UserDefaults for saving preferences
 	let resetArray = [0,0,0,0,0]
-	var paramsArray = [0,0,0,0,0]	// paramsArray = [posType, matType, pointType, gameType, switchType]
+	var paramsArray = [0,0,0,0,0]	// [posType, matType, pointType, gameType, switchType]
 	let matchDefaults = UserDefaults.standard
 	
     /*-Functions-------------------------------------------------------------*/
@@ -143,7 +143,7 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         // Arrays
-        pTextArray = p0TextArray
+//        pTextArray = p0TextArray
         pFieldArray = [p1Field,p2Field,p3Field,p4Field]
         dImageArray = [d1Image,d2Image]
 		
@@ -202,8 +202,15 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
         if segue.identifier == "toMatchVC" {
 			// Adjust pNames for singles??
 			
-            // Create match, destination VC, and send it
-			let match = Doubles(players: pTextArray, params: paramsArray)
+			let match: DoublesMatch
+			if paramsArray[1]==0 {
+				// Create doubles match, destination VC, and send it
+				match = DoublesMatch(players: pTextArray, params: paramsArray)
+			} else {
+				pTextArray[1] = ""; pTextArray[3] = ""	// delete partners
+				match = SinglesMatch(players: pTextArray, params: paramsArray)
+			}
+			
             let matchVC = segue.destination as! MatchViewController
 			matchVC.match = match
         }
