@@ -57,7 +57,6 @@ class SinglesMatch: DoublesMatch {
 		super.sideOut()
 		
 		server = score[teamPos]%2 == 0 ? server : server+1
-		
 		let sumscores = score.reduce(0,+)
 		if sumscores%2 ~= 0 {
 			playerSpots = [1,0,3,2].map( {playerSpots[$0]} )	// switch players

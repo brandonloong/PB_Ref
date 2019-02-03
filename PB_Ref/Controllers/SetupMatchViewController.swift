@@ -73,11 +73,21 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 		}
 	}
 	// Display the doubles partner fields and the doubles buttons
-	func showDoubles(show: Bool) {
-		p2Field.isHidden = show
-		p4Field.isHidden = show
-		swap0ButtonOutlet.isHidden = show
-		swap1ButtonOutlet.isHidden = show
+	func showDoubles(_ hidden: Bool) {
+		p2Field.isHidden = hidden
+		p4Field.isHidden = hidden
+		swap0ButtonOutlet.isHidden = hidden
+		swap1ButtonOutlet.isHidden = hidden
+		
+		if !hidden {	// update field text to default
+			if let players = matchDefaults.array(forKey: "defaultPlayers") as? [String] {
+				pTextArray = players
+				print("showDoubles_playerDefaults_if")
+			} else {
+				pTextArray = p0TextArray	// is this necessary? is there ever a nil matchDefaults?
+				print("showDoubles_playerDefaults_else")
+			}
+		}
 	}
     // Save player names from text array into
 	func savePlayers(_ f: [String]) {
@@ -111,11 +121,11 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 	}
 	// Reset to default match
 	@IBAction func resetSetupButton(_ sender: UIButton) {
-		pTextArray = p0TextArray			// reset player names
-		updateFields(f: pTextArray)			// update the fields
+		pTextArray = p0TextArray		// reset player names
+		updateFields(f: pTextArray)		// update the fields
 		updateButtons(params: resetArray)	// reset button values
-		swapRef(side: 0)         			// reset ref and serv dot
-		showDoubles(show: false)			// show doubles buttons & fields
+		swapRef(side: 0)         		// reset ref and serv dot
+		showDoubles(false)				// show doubles buttons & fields
 	}
 	@IBAction func startMatchButton(_ sender: UIButton) {
 	}
@@ -128,12 +138,12 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 		paramsArray[t] = s
 		matchDefaults.set(paramsArray, forKey: "defaultParams")
 		
-		// Extra functionality for 2 buttons (use switch to include more buttons)
-		if t==0 {
+		// Extra functionality for 2 buttons (use switch to add more buttons)
+		if t==0 {			// initial posession button pressed
 			swapRef(side: s)
-		} else if t==1 {
-			let show = (s==0 ? false : true)
-			showDoubles(show: show)
+		} else if t==1 {	// match type button pressed
+			let hidden = (s==0 ? false : true)
+			showDoubles(hidden)
 		}
 		print("paramButton \(paramsArray)")
 	}
@@ -143,7 +153,7 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         // Arrays
-//        pTextArray = p0TextArray
+        pTextArray = p0TextArray
         pFieldArray = [p1Field,p2Field,p3Field,p4Field]
         dImageArray = [d1Image,d2Image]
 		
@@ -154,8 +164,10 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 		if let players = matchDefaults.array(forKey: "defaultPlayers") as? [String] {
 			pTextArray = players
 		}
-		swapRef(side: paramsArray[0])	// update ref position
+//		swapRef(side: paramsArray[0])	// update ref position
 		updateFields(f: pTextArray)     // fill in player fields
+		paramButton(posTypeOutlet)		// activate posession button
+		paramButton(matchTypeOutlet)	// activate button to update display
 		
 		// Delegate control of keyboard to SetupMatchVC (or drag fields to VC-delegate in IB)
 		p1Field.delegate = self; p2Field.delegate = self
