@@ -31,47 +31,65 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ai-yX-ES1">
-                                <rect key="frame" x="20" y="646" width="374" height="70"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UAF-px-9S3" userLabel="BottomView">
+                                <rect key="frame" x="0.0" y="630" width="414" height="86"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K47-GP-fWl" userLabel="SeparatorView1">
+                                        <rect key="frame" x="203" y="8" width="8" height="70"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="8" id="Cxa-p1-irE"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rsw-iy-UAf">
+                                        <rect key="frame" x="219" y="8" width="187" height="70"/>
+                                        <state key="normal" title="New Match"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="nyK-oP-jRM" kind="show" id="uD2-Cl-bSz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ai-yX-ES1">
+                                        <rect key="frame" x="8" y="8" width="187" height="70"/>
+                                        <state key="normal" title="Saved Matches"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="trR-Bg-ifi"/>
+                                    <constraint firstItem="K47-GP-fWl" firstAttribute="leading" secondItem="4Ai-yX-ES1" secondAttribute="trailing" constant="8" id="3xH-mF-hwp"/>
+                                    <constraint firstItem="4Ai-yX-ES1" firstAttribute="top" secondItem="UAF-px-9S3" secondAttribute="top" constant="8" id="9Mh-um-47A"/>
+                                    <constraint firstItem="4Ai-yX-ES1" firstAttribute="leading" secondItem="UAF-px-9S3" secondAttribute="leading" constant="8" id="Fsm-Gb-Db2"/>
+                                    <constraint firstItem="rsw-iy-UAf" firstAttribute="leading" secondItem="K47-GP-fWl" secondAttribute="trailing" constant="8" id="J2k-LV-NVa"/>
+                                    <constraint firstItem="K47-GP-fWl" firstAttribute="top" secondItem="UAF-px-9S3" secondAttribute="top" constant="8" id="JXP-4S-S1e"/>
+                                    <constraint firstItem="rsw-iy-UAf" firstAttribute="top" secondItem="UAF-px-9S3" secondAttribute="top" constant="8" id="O5f-Wx-FTb"/>
+                                    <constraint firstItem="K47-GP-fWl" firstAttribute="centerX" secondItem="UAF-px-9S3" secondAttribute="centerX" id="OMH-Fa-mTQ"/>
+                                    <constraint firstAttribute="height" constant="86" id="V1s-MX-h90"/>
+                                    <constraint firstAttribute="trailing" secondItem="rsw-iy-UAf" secondAttribute="trailing" constant="8" id="cwl-Am-gc8"/>
+                                    <constraint firstAttribute="bottom" secondItem="rsw-iy-UAf" secondAttribute="bottom" constant="8" id="e0q-cg-v7B"/>
+                                    <constraint firstAttribute="bottom" secondItem="K47-GP-fWl" secondAttribute="bottom" constant="8" id="k1V-2j-6P3"/>
+                                    <constraint firstAttribute="bottom" secondItem="4Ai-yX-ES1" secondAttribute="bottom" constant="8" id="rNp-3I-ViX"/>
                                 </constraints>
-                                <state key="normal" title="Saved Matches"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rsw-iy-UAf">
-                                <rect key="frame" x="20" y="556" width="374" height="70"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="tFu-ni-TjQ"/>
-                                </constraints>
-                                <state key="normal" title="New Match"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <segue destination="nyK-oP-jRM" kind="show" id="uD2-Cl-bSz"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="4Ai-yX-ES1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="0pg-Hn-p0b"/>
-                            <constraint firstItem="4Ai-yX-ES1" firstAttribute="top" secondItem="rsw-iy-UAf" secondAttribute="bottom" constant="20" id="89d-0o-qWf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hOe-Zh-khN" secondAttribute="trailing" id="FaV-CL-sSW"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rsw-iy-UAf" secondAttribute="trailing" constant="20" id="JGm-rr-LMh"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4Ai-yX-ES1" secondAttribute="bottom" constant="20" id="OQd-AD-hOx"/>
-                            <constraint firstItem="rsw-iy-UAf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="RvQ-6g-Uuk"/>
+                            <constraint firstItem="UAF-px-9S3" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="KCd-tU-hF8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="UAF-px-9S3" secondAttribute="bottom" constant="20" id="Lyf-e0-JwX"/>
+                            <constraint firstItem="UAF-px-9S3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="VaO-wD-DFN"/>
                             <constraint firstItem="hOe-Zh-khN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Ynh-UG-4LS"/>
                             <constraint firstItem="3wC-qS-OSd" firstAttribute="top" secondItem="hOe-Zh-khN" secondAttribute="bottom" constant="48" id="gIu-9j-hfA"/>
                             <constraint firstItem="hOe-Zh-khN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ihl-Tj-6nu"/>
                             <constraint firstItem="3wC-qS-OSd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kPJ-Ux-oj2"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4Ai-yX-ES1" secondAttribute="trailing" constant="20" id="t2W-vM-tDg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -79,7 +97,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="364" y="116"/>
+            <point key="canvasLocation" x="363.768115942029" y="115.7608695652174"/>
         </scene>
         <!--Setup Match View Controller-->
         <scene sceneID="dzA-fT-wWI">
