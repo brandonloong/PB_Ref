@@ -91,7 +91,7 @@ class MatchViewController: UIViewController {
 			toTime = 120		// 2 min timeout
 			
 			timeOutAlert2 = UIAlertController(title: "Timeout Countdown: 02:00", message: "Team \(t+1) has \(match.timeOuts[t]) timeouts left.", preferredStyle: .actionSheet)
-			let timeOutAction5 = UIAlertAction(title: "Stop Timeout and Resume Play", style: .default) { (UIAlertAction) in
+			let timeOutAction5 = UIAlertAction(title: "Stop Timeout Early", style: .default) { (UIAlertAction) in
 				self.timeOutInvalidate(tim: self.timer2, alert: self.timeOutAlert2)
 			}
 			timeOutAlert2.addAction(timeOutAction5)
@@ -213,13 +213,11 @@ class MatchViewController: UIViewController {
 	
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-          if segue.identifier == "toMatchSumVC" {
-//               let matchSumVC = segue.destination as! MatchSummaryViewController
-
-               // Send game runners & info
-//               matchSumVC.setRecord = setRecord; matchSumVC.winner = winner
-//               matchSumVC.matchOver = matchOver; matchSumVC.ipTextArray = ipTextArray
-          }
+		if segue.identifier == "toMatchSumVC" {
+			// Transfer current match
+			let matchSumVC = segue.destination as! MatchSummaryViewController
+			matchSumVC.match = match
+		}
     }
 
 }

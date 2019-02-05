@@ -203,7 +203,6 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
 	}
     // Hide keyboard if touched outside of text field
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//		textFieldShouldReturn(activeField)
 		resetBlankFields()			// check all fields (be sure to check all)
 		savePlayers(pTextArray)		// save player names in defaults
 		activeField.resignFirstResponder()
@@ -212,8 +211,6 @@ class SetupMatchViewController: UIViewController, UITextFieldDelegate {
     // Pass new match object to MatchViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toMatchVC" {
-			// Adjust pNames for singles??
-			
 			let match: DoublesMatch
 			if paramsArray[1]==0 {
 				// Create doubles match, destination VC, and send it

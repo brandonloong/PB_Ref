@@ -71,17 +71,34 @@ class CoinTossViewController: UIViewController {
 	func toggleViewOn(_ show: Bool) {
 		let status = !show
 		
-		// Show/hide views
+		// Show/hide views (animate?)
+//		UIView.animate(withDuration: 0.5) {
+//			self.step1ResultLabel.isHidden = status
+//			self.step2Label.isHidden = status
+//			self.randNumButtonOutlet.isHidden = status
+//			self.randNumLabel1.isHidden = status
+//			self.randNumLabel2.isHidden = status
+//			self.randNumLabel3.isHidden = status
+//
+//			// Reset colors
+//			self.defaultColors()
+//
+//			// Reset text
+//			if status {
+//				self.chosenTeamLabel.text = "?"
+//				self.randNumLabel2.text = "?"
+//			}
+//		}
 		step1ResultLabel.isHidden = status
 		step2Label.isHidden = status
 		randNumButtonOutlet.isHidden = status
 		randNumLabel1.isHidden = status
 		randNumLabel2.isHidden = status
 		randNumLabel3.isHidden = status
-		
+
 		// Reset colors
 		defaultColors()
-		
+
 		// Reset text
 		if status {
 			chosenTeamLabel.text = "?"

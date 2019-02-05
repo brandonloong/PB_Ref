@@ -15,7 +15,7 @@ class SinglesMatch: DoublesMatch {
 		
 		score = [0,0,1]
 	}
-	/*-Point Functions---------------------------------------------------------------------*/
+	/*-Point Functions--------------------------------------------------------*/
 	override func point() {
 		if !gameOver {		// continue game
 			//verify sidePos is set correctly before this is called
@@ -41,7 +41,7 @@ class SinglesMatch: DoublesMatch {
 		playerSpots.swapAt(2,3)
 		playerNames = playerSpots.map( {playerList[$0]} ) // update names
 	}
-	
+	/*-Fault Functions--------------------------------------------------------*/
 	override func fault() {
 		if !gameOver {
 			// Only 1 option for singles
