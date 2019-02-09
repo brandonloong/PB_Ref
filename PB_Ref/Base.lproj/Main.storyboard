@@ -151,9 +151,9 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IR2-Xk-kdj">
-                                        <rect key="frame" x="357" y="35" width="57" height="180"/>
+                                        <rect key="frame" x="357" y="60" width="57" height="135"/>
                                         <color key="backgroundColor" red="0.93115690090000003" green="0.93540012240000003" blue="0.94812978699999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <inset key="imageEdgeInsets" minX="26" minY="60" maxX="10" maxY="60"/>
+                                        <inset key="imageEdgeInsets" minX="25" minY="36" maxX="10" maxY="36"/>
                                         <state key="normal" title="Button" image="tourny_swap_icon_v1">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
@@ -167,9 +167,9 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoF-Vf-brJ">
-                                        <rect key="frame" x="0.0" y="35" width="57" height="180"/>
+                                        <rect key="frame" x="0.0" y="60" width="57" height="135"/>
                                         <color key="backgroundColor" red="0.93115690090000003" green="0.93540012240000003" blue="0.94812978699999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <inset key="imageEdgeInsets" minX="10" minY="60" maxX="26" maxY="60"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="36" maxX="25" maxY="36"/>
                                         <state key="normal" title="Button" image="tourny_swap_icon_v2">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
@@ -304,12 +304,12 @@
                                     <constraint firstItem="hoF-Vf-brJ" firstAttribute="leading" secondItem="Y3G-rT-sjA" secondAttribute="leading" id="4MF-TO-ADh"/>
                                     <constraint firstItem="LES-SQ-n3S" firstAttribute="leading" secondItem="dGI-1j-WtA" secondAttribute="trailing" constant="2" id="4pd-9a-hhZ"/>
                                     <constraint firstAttribute="height" constant="240" id="GOp-EQ-gqB"/>
-                                    <constraint firstItem="IR2-Xk-kdj" firstAttribute="top" secondItem="zpK-jC-uan" secondAttribute="bottom" constant="15" id="Ins-lX-DNd"/>
+                                    <constraint firstItem="IR2-Xk-kdj" firstAttribute="top" secondItem="zpK-jC-uan" secondAttribute="bottom" constant="40" id="Ins-lX-DNd"/>
                                     <constraint firstItem="JlI-d4-Kls" firstAttribute="centerX" secondItem="Y3G-rT-sjA" secondAttribute="centerX" id="JqU-wu-eFp"/>
-                                    <constraint firstAttribute="bottom" secondItem="hoF-Vf-brJ" secondAttribute="bottom" constant="25" id="KhX-hh-n1Y"/>
+                                    <constraint firstAttribute="bottom" secondItem="hoF-Vf-brJ" secondAttribute="bottom" constant="45" id="KhX-hh-n1Y"/>
                                     <constraint firstItem="qvg-Pr-MkO" firstAttribute="leading" secondItem="LES-SQ-n3S" secondAttribute="trailing" constant="2" id="Nl4-fT-vDS"/>
                                     <constraint firstItem="MDP-6A-JJD" firstAttribute="centerX" secondItem="Y3G-rT-sjA" secondAttribute="centerX" id="X59-f8-I7z"/>
-                                    <constraint firstItem="hoF-Vf-brJ" firstAttribute="top" secondItem="zpK-jC-uan" secondAttribute="bottom" constant="15" id="Xjq-8l-Utg"/>
+                                    <constraint firstItem="hoF-Vf-brJ" firstAttribute="top" secondItem="zpK-jC-uan" secondAttribute="bottom" constant="40" id="Xjq-8l-Utg"/>
                                     <constraint firstItem="zpK-jC-uan" firstAttribute="top" secondItem="Y3G-rT-sjA" secondAttribute="top" id="a1a-0R-Dsf"/>
                                     <constraint firstItem="LES-SQ-n3S" firstAttribute="top" secondItem="MDP-6A-JJD" secondAttribute="bottom" constant="4" id="c3Z-mS-pAx"/>
                                     <constraint firstAttribute="trailing" secondItem="zpK-jC-uan" secondAttribute="trailing" constant="20" id="dXx-5b-bae"/>
@@ -322,7 +322,7 @@
                                     <constraint firstAttribute="bottom" secondItem="LES-SQ-n3S" secondAttribute="bottom" id="l1g-0Z-JpR"/>
                                     <constraint firstItem="LES-SQ-n3S" firstAttribute="top" secondItem="JlI-d4-Kls" secondAttribute="bottom" id="rTM-vA-R8c"/>
                                     <constraint firstItem="JlI-d4-Kls" firstAttribute="top" secondItem="zpK-jC-uan" secondAttribute="bottom" id="uQi-Qj-2pl"/>
-                                    <constraint firstAttribute="bottom" secondItem="IR2-Xk-kdj" secondAttribute="bottom" constant="25" id="ufA-3e-Tpv"/>
+                                    <constraint firstAttribute="bottom" secondItem="IR2-Xk-kdj" secondAttribute="bottom" constant="45" id="ufA-3e-Tpv"/>
                                     <constraint firstAttribute="bottom" secondItem="dGI-1j-WtA" secondAttribute="bottom" constant="70" id="wtQ-Lb-8GS"/>
                                 </constraints>
                             </view>
@@ -1460,7 +1460,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TvD-iF-4gR" userLabel="ButtonsView2">
                                 <rect key="frame" x="0.0" y="552" width="414" height="100"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click the Result of Each Rally" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1d-bH-Rhi">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click Result of Each Rally" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1d-bH-Rhi">
                                         <rect key="frame" x="8" y="8" width="398" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="AsI-Y1-5uI"/>
@@ -2639,6 +2639,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                         </subviews>
+                                        <color key="backgroundColor" red="0.44757473468780518" green="0.62834316492080688" blue="0.97258836030960083" alpha="0.14999999999999999" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstItem="7Fl-vl-AEb" firstAttribute="leading" secondItem="Zdh-eE-NJV" secondAttribute="leading" id="1Lo-9z-TFu"/>
                                             <constraint firstAttribute="bottom" secondItem="7Fl-vl-AEb" secondAttribute="bottom" constant="170" id="23M-e0-JQi"/>
